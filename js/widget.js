@@ -47,6 +47,7 @@ jQuery( document ).ready( function() {
 
 		min = ( position % px_per_hour ) / px_per_hour * 60 | 0; 
 		if ( min < 10 ) min = '0' + min;
+		if ( isNaN( min ) ) min = '00';
 
 		hours = hours % 12;
 		if ( hours == 0 ) hours = 12;	
