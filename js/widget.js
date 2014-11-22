@@ -1,5 +1,7 @@
-var beg_time = 6;
-var end_time = 22;
+var beg_time = parseInt( progressWidget.beg_time );
+var end_time = parseInt( progressWidget.end_time );
+
+console.log( beg_time, end_time );
 
 function setCurrentTime() {
 	now = new Date(),

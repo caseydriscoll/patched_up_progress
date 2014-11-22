@@ -23,7 +23,15 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		wp_register_style( 'patchedUpProgressStyles', plugins_url('css/widget.css', __FILE__) );
 		wp_enqueue_style( 'patchedUpProgressStyles' );
 
-		wp_enqueue_script( 'patchedUpProgressScripts', plugins_url('js/widget.js', __FILE__), array( 'jquery' ) );
+		wp_register_script( 'patchedUpProgressScripts', plugins_url('js/widget.js', __FILE__), array( 'jquery' ) );
+		wp_enqueue_script( 'patchedUpProgressScripts' );
+
+		$data = array(
+			'beg_time' => $instance['beg_time'],
+			'end_time' => $instance['end_time'] 
+		);
+
+		wp_localize_script( 'patchedUpProgressScripts', 'progressWidget', $data );
 
 
 		$title = apply_filters( 'widget_title', $instance['title'] );
@@ -57,8 +65,39 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 	 *
 	 * @param array $instance The widget options
 	 */
-	public function form( $instance ) {
-		// outputs the options form on admin
+	public function form( $instance ) { 
+
+		if ( isset($instance) ) extract($instance); ?>
+
+		<h3>Settings</h3>
+		<p><?php // Standard Title form ?>
+		  <label for="<?php echo $this->get_field_id('title');?>">Title:</label> 
+		  <input  type="text"
+				  class="widefat"
+				  id="<?php echo $this->get_field_id('title'); ?>"
+				  name="<?php echo $this->get_field_name('title'); ?>"
+				  value="<?php if ( isset($title) ) echo esc_attr($title); ?>" />
+		</p>
+		<p>
+		  <label for="<?php echo $this->get_field_id('beg_time');?>">Beginning Time:</label> 
+				<br />
+		  <input  type="text"
+				  class="color"
+				  id="<?php echo $this->get_field_id('beg_time'); ?>"
+				  name="<?php echo $this->get_field_name('beg_time'); ?>"
+				  maxlength="6"
+				  value="<?php if ( isset($beg_time) ) echo esc_attr($beg_time); ?>" />
+		</p>
+		<p>
+		  <label for="<?php echo $this->get_field_id('end_time');?>">End Time:</label> 
+				<br />
+		  <input  type="text"
+				  class="color"
+				  id="<?php echo $this->get_field_id('end_time'); ?>"
+				  name="<?php echo $this->get_field_name('end_time'); ?>"
+				  maxlength="6"
+				  value="<?php if ( isset($end_time) ) echo esc_attr($end_time); ?>" />
+		</p> <?php
 	}
 
 	/**
@@ -68,7 +107,14 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 	 * @param array $old_instance The previous options
 	 */
 	public function update( $new_instance, $old_instance ) {
-		// processes widget options to be saved
+		$instance = $old_instance;
+   
+		// Fields
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['beg_time'] = strip_tags($new_instance['beg_time']);
+		$instance['end_time'] = strip_tags($new_instance['end_time']);
+	  
+		return $instance;
 	}
 }
 
