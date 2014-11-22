@@ -1,14 +1,8 @@
-jQuery( document ).ready( function() {
-	var bar_width = jQuery( '#patched_up_progress_bar' ).width();
+var beg_time = 6;
+var end_time = 22;
 
-	var beg_time = 6;
-	var end_time = 22;
-
-	var hour_length = bar_width / ( end_time - beg_time ); 
-
-	var seconds = new Date().getTime() / 1000 | 0;
-
-	var now = new Date(),
+function setCurrentTime() {
+	now = new Date(),
     then = new Date(
         now.getFullYear(),
         now.getMonth(),
@@ -21,8 +15,27 @@ jQuery( document ).ready( function() {
 
 	elapsed_percent = ( elapsed_seconds - ( beg_time * 3600 ) ) / total_seconds * 100;
 
-	jQuery( '#patched_up_progress_current_time' ).css( 'left', elapsed_percent + '%' );
+	min = now.getMinutes();
+	if ( min < 10 ) min = '0' + min;
+
+	hours = now.getHours();
+	hours = hours % 12;
+	if ( hours == 0 ) hours = 12;	
+
+	jQuery( '#patched_up_progress_current_time' )
+		.css( 'left', elapsed_percent + '%' )
+		.find( 'div' ).html( hours + ":" + min);
+}
+
+jQuery( document ).ready( function() {
+	var bar_width = jQuery( '#patched_up_progress_bar' ).width();
+	var hour_length = bar_width / ( end_time - beg_time ); 
+
+	setCurrentTime();
 	
+	jQuery( '#patched_up_progress_current_time' ).show();
+	
+	setInterval( setCurrentTime, 60000 );
 
 	jQuery( '#patched_up_progress_bar' ).on( 'mouseover', function() {
 

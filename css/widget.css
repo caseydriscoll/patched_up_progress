@@ -13,7 +13,7 @@
 }
 
 #patched_up_progress_current_time {
-	position: absolute; z-index: 99;
+	display: hidden; position: absolute; z-index: 99;
 	width: 1px; height: 100%;
 
 	background: #333;
