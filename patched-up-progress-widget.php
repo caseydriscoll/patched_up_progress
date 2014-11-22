@@ -82,20 +82,16 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		  <label for="<?php echo $this->get_field_id('beg_time');?>">Beginning Time:</label> 
 				<br />
 		  <input  type="text"
-				  class="color"
 				  id="<?php echo $this->get_field_id('beg_time'); ?>"
 				  name="<?php echo $this->get_field_name('beg_time'); ?>"
-				  maxlength="6"
 				  value="<?php if ( isset($beg_time) ) echo esc_attr($beg_time); ?>" />
 		</p>
 		<p>
 		  <label for="<?php echo $this->get_field_id('end_time');?>">End Time:</label> 
 				<br />
 		  <input  type="text"
-				  class="color"
 				  id="<?php echo $this->get_field_id('end_time'); ?>"
 				  name="<?php echo $this->get_field_name('end_time'); ?>"
-				  maxlength="6"
 				  value="<?php if ( isset($end_time) ) echo esc_attr($end_time); ?>" />
 		</p> <?php
 	}
