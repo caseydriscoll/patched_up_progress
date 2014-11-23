@@ -18,10 +18,18 @@ class Patched_Up_Progress {
 	}
 
 	function add_action() {
+		if ( ! is_user_logged_in() )
+			wp_send_json_error( 
+				array(
+					'success' => false
+				)
+			);
+			
 		wp_insert_post( 
 			array( 
 				'post_title' => $_POST['title'],
-				'post_type' => 'action'
+				'post_type' => 'action',
+				'post_author' => get_current_user_id()
 			)
 		);
 

@@ -45,7 +45,9 @@ jQuery( document ).ready( function() {
 
 		jQuery( '#patched_up_progress_cursor_time' ).show();
 		jQuery( '#patched_up_progress_current_time_display' ).show();
-		jQuery( '#patched_up_progress_add_action' ).show();
+
+		if ( jQuery( 'body' ).hasClass( 'logged-in' ) )
+			jQuery( '#patched_up_progress_add_action' ).show();
 
 	} ).on( 'mouseout', function() {
 		
@@ -79,14 +81,18 @@ jQuery( document ).ready( function() {
 	} );
 
 	jQuery( '#patched_up_progress_add_action' ).on( 'click', function() {
-		jQuery( '#patched_up_progress_action' ).show().focus();
+		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
+			jQuery( '#patched_up_progress_action' ).show().focus();
+		} else {
+			window.location = '/wp-login.php';
+		}
 	} );
 
 	jQuery( 'body' ).on( 'keyup', function(e) {
-		if ( e.keyCode == 187 )
+		if ( e.keyCode == 187 ) // +
 			jQuery( '#patched_up_progress_add_action' ).click();
 
-		if ( e.keyCode == 27 )
+		if ( e.keyCode == 27 ) // esc
 			jQuery( '#patched_up_progress_action' ).hide();
 	} );
 
@@ -96,7 +102,7 @@ jQuery( document ).ready( function() {
 
 		if ( title == '') return;
 
-		if ( e.keyCode == 13 ) {
+		if ( e.keyCode == 13 ) { // enter
 			jQuery( '.load' ).show();
 
 			jQuery.post(
@@ -112,7 +118,15 @@ jQuery( document ).ready( function() {
 
 						jQuery( '#patched_up_progress_response' )
 							.html( "Successfully added '" + response.data.title + "'!" )
-							.show().fadeOut( 3000 );
+							.show().fadeOut( 2000 );
+					} else {
+						jQuery( '.load' ).hide();
+						jQuery( '#patched_up_progress_action' ).empty().hide();
+
+						jQuery( '#patched_up_progress_response' )
+							.addClass( 'error' ).html( "Nope!" )
+							.show().fadeOut( 2000 );
+						
 					}
 				}
 			);

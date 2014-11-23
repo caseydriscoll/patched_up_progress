@@ -77,6 +77,11 @@
 
 #patched_up_progress_response {
 	display: none;
+	padding: 6px;
 	color: #4CBB17;
 	font-weight: bold;
+	}
+
+.error {
+	color: red !important;
 }
