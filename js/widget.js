@@ -31,15 +31,25 @@ function setCurrentTime() {
 	jQuery( '#patched_up_progress_current_time' )
 		.show().css( 'left', elapsed_percent + '%' )
 		.find( '#patched_up_progress_current_time_display' ).html( hours + ":" + min);
+
+}
+
+function setInitialTime() {
+	setCurrentTime(); 
+
+	now = new Date();
+	setTimeout( resetTime, ( 60 - now.getSeconds() ) * 1000 );
+}
+
+function resetTime() {
+	setInterval( setCurrentTime, 60000 );
 }
 
 jQuery( document ).ready( function() {
 	var bar_width = jQuery( '#patched_up_progress_bar' ).width();
 	var hour_length = bar_width / ( end_time - beg_time ); 
 
-	setCurrentTime();
-	
-	setInterval( setCurrentTime, 60000 );
+	setInitialTime();
 
 	jQuery( '#patched_up_progress_bar' ).on( 'mouseover', function() {
 

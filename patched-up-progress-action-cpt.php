@@ -10,8 +10,6 @@ function add_action_timestamp( $post_id, $post, $update ) {
 	$post->post_status = 'publish';
 	$post->post_name = sanitize_title_with_dashes( $post->post_title . $timestamp );	
 
-	error_log( print_r( $post, true ) );
-
 	if ( $post->post_date == $post->post_modified ) {
 	
 		remove_action( 'save_post_action', 'add_action_timestamp' );
