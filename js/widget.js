@@ -1,8 +1,10 @@
 var beg_time = parseInt( progressWidget.beg_time );
 var end_time = parseInt( progressWidget.end_time );
 
+var pupp = '#patched_up_progress'; 
+
 function setCurrentTime() {
-	jQuery( '#patched_up_progress_current_time' ).hide();
+	jQuery( pupp + '_current_time' ).hide();
 
 	now = new Date(),
     then = new Date(
@@ -28,9 +30,9 @@ function setCurrentTime() {
 	if ( hours == 0 ) hours = 12;	
 
 
-	jQuery( '#patched_up_progress_current_time' )
+	jQuery( pupp + '_current_time' )
 		.show().css( 'left', elapsed_percent + '%' )
-		.find( '#patched_up_progress_current_time_display' ).html( hours + ":" + min);
+		.find( pupp + '_current_time_display' ).html( hours + ":" + min);
 
 }
 
@@ -46,38 +48,38 @@ function resetTime() {
 }
 
 jQuery( document ).ready( function() {
-	var bar_width = jQuery( '#patched_up_progress_bar' ).width();
+	var bar_width = jQuery( pupp + '_bar' ).width();
 	var hour_length = bar_width / ( end_time - beg_time ); 
 
 	setInitialTime();
 
-	jQuery( '#patched_up_progress_bar' ).on( 'mouseover', function() {
+	jQuery( pupp + '_bar' ).on( 'mouseover', function() {
 
-		jQuery( '#patched_up_progress_cursor_time' ).show();
-		jQuery( '#patched_up_progress_current_time_display' ).show();
+		jQuery( pupp + '_cursor_time' ).show();
+		jQuery( pupp + '_current_time_display' ).show();
 
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) { 
-			jQuery( '#patched_up_progress_add_action' ).show();
+			jQuery( pupp + '_add_action' ).show();
 
-			if ( jQuery( '#patched_up_progress_action' ).css( 'display' ) != 'none' )
-				jQuery( '#patched_up_progress_close_action' ).show();
+			if ( jQuery( pupp + '_action' ).css( 'display' ) != 'none' )
+				jQuery( pupp + '_close_action' ).show();
 		}
 
 	} ).on( 'mouseout', function() {
 		
-		jQuery( '#patched_up_progress_cursor_time' ).hide();
-		jQuery( '#patched_up_progress_current_time_display' ).hide();
-		jQuery( '#patched_up_progress_add_action' ).hide();
-		jQuery( '#patched_up_progress_close_action' ).hide();
+		jQuery( pupp + '_cursor_time' ).hide();
+		jQuery( pupp + '_current_time_display' ).hide();
+		jQuery( pupp + '_add_action' ).hide();
+		jQuery( pupp + '_close_action' ).hide();
 
 	} ).on( 'mousemove', function(e) {
 
-		position = e.pageX - jQuery( '#patched_up_progress_bar' ).offset().left;
+		position = e.pageX - jQuery( pupp + '_bar' ).offset().left;
 		position_percent = position / bar_width * 100;
 
 		if ( position < 0 || position_percent > 100 ) return;
 
-		jQuery( '#patched_up_progress_cursor_time' ).css( 'left' , position_percent + '%' );
+		jQuery( pupp + '_cursor_time' ).css( 'left' , position_percent + '%' );
 
 		px_per_hour = bar_width / ( end_time - beg_time );
 
@@ -90,34 +92,34 @@ jQuery( document ).ready( function() {
 		hours = hours % 12;
 		if ( hours == 0 ) hours = 12;	
 
-		jQuery( '#patched_up_progress_cursor_time_display' ).html(
+		jQuery( pupp + '_cursor_time_display' ).html(
 			hours + ":" + min 
 		);
 	} );
 
-	jQuery( '#patched_up_progress_add_action' ).on( 'click', function() {
+	jQuery( pupp + '_add_action' ).on( 'click', function() {
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
-			jQuery( '#patched_up_progress_action' ).show().focus();
-			jQuery( '#patched_up_progress_close_action' ).show();
+			jQuery( pupp + '_action' ).show().focus();
+			jQuery( pupp + '_close_action' ).show();
 		} else {
 			window.location = '/wp-login.php';
 		}
 	} );
 
-	jQuery( '#patched_up_progress_close_action' ).on( 'click', function() {
-		jQuery( '#patched_up_progress_close_action' ).hide();
-		jQuery( '#patched_up_progress_action' ).empty().hide();
+	jQuery( pupp + '_close_action' ).on( 'click', function() {
+		jQuery( pupp + '_close_action' ).hide();
+		jQuery( pupp + '_action' ).empty().hide();
 	} );
 
 	jQuery( 'body' ).on( 'keyup', function(e) {
 		if ( e.keyCode == 187 ) // +
-			jQuery( '#patched_up_progress_add_action' ).click();
+			jQuery( pupp + '_add_action' ).click();
 
 		if ( e.keyCode == 27 ) // esc
-			jQuery( '#patched_up_progress_close_action' ).click();
+			jQuery( pupp + '_close_action' ).click();
 	} );
 
-	jQuery( '#patched_up_progress_action' ).on( 'keypress', function(e) {
+	jQuery( pupp + '_action' ).on( 'keypress', function(e) {
 
 		title = jQuery( e.target ).val();
 
@@ -135,16 +137,16 @@ jQuery( document ).ready( function() {
 				function( response ){
 					if ( response.success ) {
 						jQuery( '.load' ).hide();
-						jQuery( '#patched_up_progress_action' ).empty().hide();
+						jQuery( pupp + '_action' ).empty().hide();
 
-						jQuery( '#patched_up_progress_response' )
+						jQuery( pupp + '_response' )
 							.html( "Successfully added '" + response.data.title + "'!" )
 							.show().fadeOut( 2000 );
 					} else {
 						jQuery( '.load' ).hide();
-						jQuery( '#patched_up_progress_action' ).empty().hide();
+						jQuery( pupp + '_action' ).empty().hide();
 
-						jQuery( '#patched_up_progress_response' )
+						jQuery( pupp + '_response' )
 							.addClass( 'error' ).html( "Nope!" )
 							.show().fadeOut( 2000 );
 						
