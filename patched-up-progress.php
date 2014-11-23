@@ -10,6 +10,7 @@
  */
 
 include 'patched-up-progress-widget.php';
+include 'patched-up-progress-action-cpt.php';
 
 class Patched_Up_Progress {
 	function __construct() {
