@@ -4,6 +4,8 @@ var end_time = parseInt( progressWidget.end_time );
 console.log( beg_time, end_time );
 
 function setCurrentTime() {
+	jQuery( '#patched_up_progress_current_time' ).hide();
+
 	now = new Date(),
     then = new Date(
         now.getFullYear(),
@@ -21,11 +23,15 @@ function setCurrentTime() {
 	if ( min < 10 ) min = '0' + min;
 
 	hours = now.getHours();
+
+	if ( hours < beg_time || hours >= end_time ) return;
+
 	hours = hours % 12;
 	if ( hours == 0 ) hours = 12;	
 
+
 	jQuery( '#patched_up_progress_current_time' )
-		.css( 'left', elapsed_percent + '%' )
+		.show().css( 'left', elapsed_percent + '%' )
 		.find( 'div' ).html( hours + ":" + min);
 }
 
@@ -34,8 +40,6 @@ jQuery( document ).ready( function() {
 	var hour_length = bar_width / ( end_time - beg_time ); 
 
 	setCurrentTime();
-	
-	jQuery( '#patched_up_progress_current_time' ).show();
 	
 	setInterval( setCurrentTime, 60000 );
 
@@ -53,6 +57,8 @@ jQuery( document ).ready( function() {
 
 		position = e.pageX - jQuery( '#patched_up_progress_bar' ).offset().left;
 		position_percent = position / bar_width * 100;
+
+		if ( position < 0 || position_percent > 100 ) return;
 
 		jQuery( '#patched_up_progress_cursor_time' ).css( 'left' , position_percent + '%' );
 
