@@ -30,7 +30,7 @@
 		background: #333;
 		border-radius: 2px;
 	}
-	#patched_up_progress_add_action {
+	#patched_up_progress_add_btn {
 		display: none; position: absolute;
 		left: -6px; top: -8px;
 		padding: 0 4px;
@@ -41,10 +41,10 @@
 		background: #4CBB17;
 		border-radius: 2px;
 		}
-		#patched_up_progress_add_action:hover {
+		#patched_up_progress_add_btn:hover {
 			background: #93DB70;
 		}
-	#patched_up_progress_close_action {
+	#patched_up_progress_close_btn {
 		display: none; position: absolute;
 		left: -6px; top: 9px;
 		padding: 0 5px 1px;
@@ -55,7 +55,7 @@
 		background: #BB174C;
 		border-radius: 2px;
 		}
-		#patched_up_progress_close_action:hover {
+		#patched_up_progress_close_btn:hover {
 			background: #d67393;
 		}
 

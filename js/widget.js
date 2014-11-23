@@ -59,18 +59,17 @@ jQuery( document ).ready( function() {
 		jQuery( pupp + '_current_time_display' ).show();
 
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) { 
-			jQuery( pupp + '_add_action' ).show();
+			jQuery( pupp + '_add_btn' ).show();
 
 			if ( jQuery( pupp + '_action' ).css( 'display' ) != 'none' )
-				jQuery( pupp + '_close_action' ).show();
+				jQuery( pupp + '_close_btn' ).show();
 		}
 
 	} ).on( 'mouseout', function() {
 		
 		jQuery( pupp + '_cursor_time' ).hide();
 		jQuery( pupp + '_current_time_display' ).hide();
-		jQuery( pupp + '_add_action' ).hide();
-		jQuery( pupp + '_close_action' ).hide();
+		jQuery( '.btn' ).hide();
 
 	} ).on( 'mousemove', function(e) {
 
@@ -97,26 +96,26 @@ jQuery( document ).ready( function() {
 		);
 	} );
 
-	jQuery( pupp + '_add_action' ).on( 'click', function() {
+	jQuery( pupp + '_add_btn' ).on( 'click', function() {
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
 			jQuery( pupp + '_action' ).show().focus();
-			jQuery( pupp + '_close_action' ).show();
+			jQuery( pupp + '_close_btn' ).show();
 		} else {
 			window.location = '/wp-login.php';
 		}
 	} );
 
-	jQuery( pupp + '_close_action' ).on( 'click', function() {
-		jQuery( pupp + '_close_action' ).hide();
+	jQuery( pupp + '_close_btn' ).on( 'click', function() {
+		jQuery( pupp + '_close_btn' ).hide();
 		jQuery( pupp + '_action' ).empty().hide();
 	} );
 
 	jQuery( 'body' ).on( 'keyup', function(e) {
 		if ( e.keyCode == 187 ) // +
-			jQuery( pupp + '_add_action' ).click();
+			jQuery( pupp + '_add_btn' ).click();
 
 		if ( e.keyCode == 27 ) // esc
-			jQuery( pupp + '_close_action' ).click();
+			jQuery( pupp + '_close_btn' ).click();
 	} );
 
 	jQuery( pupp + '_action' ).on( 'keypress', function(e) {
@@ -136,8 +135,8 @@ jQuery( document ).ready( function() {
 				}, 
 				function( response ){
 					if ( response.success ) {
-						jQuery( '.load' ).hide();
-						jQuery( pupp + '_action' ).empty().hide();
+						jQuery( '.load, .btn' ).hide();
+						jQuery( pupp + '_action' ).val( '' ).hide();
 
 						jQuery( pupp + '_response' )
 							.html( "Successfully added '" + response.data.title + "'!" )
@@ -156,6 +155,5 @@ jQuery( document ).ready( function() {
 
 		}
 	} );
-	
 
 });
