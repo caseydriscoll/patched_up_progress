@@ -69,3 +69,14 @@
 	display: none;
 	padding: 6px !important; margin-top: 10px;
 }
+
+.load {
+	display: none;
+	margin-top: 10px;
+}
+
+#patched_up_progress_response {
+	display: none;
+	color: #4CBB17;
+	font-weight: bold;
+}

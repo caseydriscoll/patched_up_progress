@@ -55,6 +55,8 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '</div>';
 
 		echo '<input type="text" id="patched_up_progress_action" />';
+		echo '<img class="load" src="/wp-includes/js/thickbox/loadingAnimation.gif" />';
+		echo '<div id="patched_up_progress_response"></div>';
 
 
 		echo $args['after_widget'];

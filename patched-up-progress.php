@@ -14,6 +14,23 @@ include 'patched-up-progress-action-cpt.php';
 
 class Patched_Up_Progress {
 	function __construct() {
+		add_action( 'wp_ajax_add_action', array( $this, 'add_action' ) );
+	}
+
+	function add_action() {
+		wp_insert_post( 
+			array( 
+				'post_title' => $_POST['title'],
+				'post_type' => 'action'
+			)
+		);
+
+		wp_send_json_success( 
+			array( 
+				'success' => true,
+				'title' => $_POST['title']
+			)
+		);
 	}
 }
 

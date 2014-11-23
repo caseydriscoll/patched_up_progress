@@ -90,4 +90,35 @@ jQuery( document ).ready( function() {
 			jQuery( '#patched_up_progress_action' ).hide();
 	} );
 
+	jQuery( '#patched_up_progress_action' ).on( 'keypress', function(e) {
+
+		title = jQuery( e.target ).val();
+
+		if ( title == '') return;
+
+		if ( e.keyCode == 13 ) {
+			jQuery( '.load' ).show();
+
+			jQuery.post(
+				'/wp-admin/admin-ajax.php', 
+				{
+					'action': 'add_action',
+					'title': title 
+				}, 
+				function( response ){
+					if ( response.success ) {
+						jQuery( '.load' ).hide();
+						jQuery( '#patched_up_progress_action' ).empty().hide();
+
+						jQuery( '#patched_up_progress_response' )
+							.html( "Successfully added '" + response.data.title + "'!" )
+							.show().fadeOut( 3000 );
+					}
+				}
+			);
+
+		}
+	} );
+	
+
 });
