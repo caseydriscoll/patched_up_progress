@@ -44,6 +44,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '<div id="patched_up_progress_bar">';
 	
 		echo '<div id="patched_up_progress_current_time">';
+		echo 	'<div id="patched_up_progress_add_action">+</div>';
 		echo 	'<div id="patched_up_progress_current_time_display"></div>';
 		echo '</div>';
 
@@ -52,6 +53,8 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '</div>';
 
 		echo '</div>';
+
+		echo '<input type="text" id="patched_up_progress_action" />';
 
 
 		echo $args['after_widget'];

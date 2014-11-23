@@ -1,8 +1,6 @@
 var beg_time = parseInt( progressWidget.beg_time );
 var end_time = parseInt( progressWidget.end_time );
 
-console.log( beg_time, end_time );
-
 function setCurrentTime() {
 	jQuery( '#patched_up_progress_current_time' ).hide();
 
@@ -32,7 +30,7 @@ function setCurrentTime() {
 
 	jQuery( '#patched_up_progress_current_time' )
 		.show().css( 'left', elapsed_percent + '%' )
-		.find( 'div' ).html( hours + ":" + min);
+		.find( '#patched_up_progress_current_time_display' ).html( hours + ":" + min);
 }
 
 jQuery( document ).ready( function() {
@@ -47,11 +45,13 @@ jQuery( document ).ready( function() {
 
 		jQuery( '#patched_up_progress_cursor_time' ).show();
 		jQuery( '#patched_up_progress_current_time_display' ).show();
+		jQuery( '#patched_up_progress_add_action' ).show();
 
 	} ).on( 'mouseout', function() {
 		
 		jQuery( '#patched_up_progress_cursor_time' ).hide();
 		jQuery( '#patched_up_progress_current_time_display' ).hide();
+		jQuery( '#patched_up_progress_add_action' ).hide();
 
 	} ).on( 'mousemove', function(e) {
 
@@ -76,6 +76,18 @@ jQuery( document ).ready( function() {
 		jQuery( '#patched_up_progress_cursor_time_display' ).html(
 			hours + ":" + min 
 		);
-
 	} );
+
+	jQuery( '#patched_up_progress_add_action' ).on( 'click', function() {
+		jQuery( '#patched_up_progress_action' ).show().focus();
+	} );
+
+	jQuery( 'body' ).on( 'keyup', function(e) {
+		if ( e.keyCode == 187 )
+			jQuery( '#patched_up_progress_add_action' ).click();
+
+		if ( e.keyCode == 27 )
+			jQuery( '#patched_up_progress_action' ).hide();
+	} );
+
 });

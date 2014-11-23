@@ -30,6 +30,20 @@
 		background: #333;
 		border-radius: 2px;
 	}
+	#patched_up_progress_add_action {
+		display: none; position: absolute;
+		left: -6px; top: -8px;
+		padding: 0 4px;
+
+		font-size: 9px;
+
+		color: white;
+		background: #4CBB17;
+		border-radius: 2px;
+		}
+		#patched_up_progress_add_action:hover {
+			background: #93DB70;
+		}
 
 #patched_up_progress_cursor_time {
 	display: none; position: absolute; z-index: 50;
@@ -49,3 +63,9 @@
 		background: red;
 		border-radius: 2px;
 	}
+
+
+#patched_up_progress_action {
+	display: none;
+	padding: 6px !important; margin-top: 10px;
+}
