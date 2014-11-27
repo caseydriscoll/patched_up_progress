@@ -7,6 +7,16 @@ add_action( 'widgets_init', function(){
 class Patched_Up_Progress_Widget extends WP_Widget {
 
 	public function __construct() {
+		wp_register_style( 'patchedUpProgressStyles', 
+			plugins_url('css/widget.css', __FILE__) );
+		wp_register_style( 'tipped', 
+			plugins_url('css/tipped.css', __FILE__) );
+
+		wp_register_script( 'patchedUpProgressScripts', 
+			plugins_url('js/widget.js', __FILE__), array( 'jquery' ) );
+		wp_register_script( 'tipped', 
+			plugins_url('js/tipped.js', __FILE__), array( 'jquery' ) );
+
 		parent::__construct(
 			'patched_up_progress',
 			'Patched Up Progress'
@@ -20,16 +30,10 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		wp_register_style( 'patchedUpProgressStyles', plugins_url('css/widget.css', __FILE__) );
 		wp_enqueue_style( 'patchedUpProgressStyles' );
-
-		wp_register_style( 'tipped', plugins_url('css/tipped.css', __FILE__) );
 		wp_enqueue_style( 'tipped' );
 
-		wp_register_script( 'patchedUpProgressScripts', plugins_url('js/widget.js', __FILE__), array( 'jquery' ) );
 		wp_enqueue_script( 'patchedUpProgressScripts' );
-
-		wp_register_script( 'tipped', plugins_url('js/tipped.js', __FILE__), array( 'jquery' ) );
 		wp_enqueue_script( 'tipped' );
 
 		$data = array(

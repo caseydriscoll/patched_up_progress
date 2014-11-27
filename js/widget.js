@@ -62,7 +62,7 @@ function setActionTimes() {
 			setCurrentActionWidth( this );
 		} else {
 			sec_per_px = total_seconds / jQuery( pupp + '_bar' ).width();
-			width = ( action_end_time_in_sec - action_time_in_sec ) / sec_per_px;
+			width = ( action_end_time_in_sec - action_time_in_sec ) / sec_per_px + 1;
 
 			jQuery( this ).css( 'width', width + 'px' ).show();
 		}
