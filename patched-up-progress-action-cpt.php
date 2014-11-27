@@ -52,6 +52,31 @@ function action_init() {
 }
 add_action( 'init', 'action_init' );
 
+function init_action_end_time() {
+	add_meta_box( 'action_end_time_meta_box',
+        'Action End Time',
+        'display_action_end_time_meta_box',
+        'action', 'side', 'low'
+    );
+}
+add_action( 'admin_init', 'init_action_end_time' );
+
+function display_action_end_time_meta_box( $action ) {
+    $end_time = esc_html( get_post_meta( $action->ID, 'end_time', true ) );
+    ?>
+            <input type="text" class="widefat" name="action_end_time" value="<?php echo $end_time; ?>" />
+    <?php
+}
+
+function add_action_fields( $action_id, $action ) {
+    if ( $action->post_type == 'action' ) {
+        if ( isset( $_POST['action_end_time'] ) && $_POST['action_end_time'] != '' ) {
+            update_post_meta( $action_id, 'end_time', $_POST['action_end_time'] );
+        }
+    }
+}
+add_action( 'save_post', 'add_action_fields', 10, 2 );
+
 function action_updated_messages( $messages ) {
 	global $post;
 
