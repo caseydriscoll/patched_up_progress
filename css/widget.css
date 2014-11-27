@@ -12,8 +12,23 @@
 	cursor: pointer;
 }
 
+#patched_up_actions {
+
+	}
+	#patched_up_actions li {
+		display: none; position: absolute; z-index: 99;
+		height: 100%;
+		border-bottom: none; border-right: 1px solid #ddd;
+		background: #555;
+		color: #fff;
+		opacity: .9;
+		}
+		#patched_up_actions li:hover {
+			background: #888;
+		}
+
 #patched_up_progress_current_time {
-	display: none; position: absolute; z-index: 99;
+	display: none; position: absolute; z-index: 1;
 	width: 1px; height: 100%;
 
 	background: #333;

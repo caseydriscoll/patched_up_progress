@@ -1,5 +1,6 @@
 var beg_time = parseInt( progressWidget.beg_time );
 var end_time = parseInt( progressWidget.end_time );
+var total_seconds = 60 * 60 * ( end_time - beg_time );
 
 var pupp = '#patched_up_progress'; 
 
@@ -14,9 +15,6 @@ function setCurrentTime() {
         0, 0, 0 ),
 
     elapsed_seconds = ( now.getTime() - then.getTime() ) / 1000 | 0;
-
-	total_seconds = 60 * 60 * ( end_time - beg_time );
-
 	elapsed_percent = ( elapsed_seconds - ( beg_time * 3600 ) ) / total_seconds * 100;
 
 	min = now.getMinutes();
@@ -28,7 +26,6 @@ function setCurrentTime() {
 
 	hours = hours % 12;
 	if ( hours == 0 ) hours = 12;	
-
 
 	jQuery( pupp + '_current_time' )
 		.show().css( 'left', elapsed_percent + '%' )
@@ -47,11 +44,26 @@ function resetTime() {
 	setInterval( setCurrentTime, 60000 );
 }
 
+function setActionTimes() {
+	jQuery( '#patched_up_actions li' ).each( function() {
+		action_time = jQuery( this ).data( 'time' ).split( ':' );
+		
+		action_time_in_sec = action_time[0] * 3600 + action_time[1] * 60; 
+
+		elapsed_percent = ( action_time_in_sec - ( beg_time * 3600 ) ) / total_seconds * 100;
+
+		jQuery( this ).css( 'left', elapsed_percent + '%' ).show();
+
+	} ); 
+}
+
 jQuery( document ).ready( function() {
 	var bar_width = jQuery( pupp + '_bar' ).width();
 	var hour_length = bar_width / ( end_time - beg_time ); 
 
 	setInitialTime();
+
+	setActionTimes();
 
 	jQuery( pupp + '_bar' ).on( 'mouseover', function() {
 

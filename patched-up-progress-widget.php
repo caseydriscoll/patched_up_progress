@@ -42,7 +42,35 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			echo $args['before_title'] . $title . $args['after_title'];
 
 		echo '<div id="patched_up_progress_bar">';
-	
+
+		$today = getdate();
+		$args = array(
+			'post_type'  => 'action',
+			'date_query' => array(
+				array(
+					'year'  => $today['year'],
+					'month' => $today['mon'],
+					'day'   => $today['mday'],
+				),
+			),
+		);
+
+		$actions = new WP_Query( $args );
+
+		echo '<ul id="patched_up_actions">';
+		while ( $actions->have_posts() ) {
+			$actions->next_post();
+
+			$id = $actions->post->ID;
+			
+			$beg_time = get_the_time( 'G:i', $id ); 
+
+			echo '<li data-time="' . $beg_time . '">' . $id . '</li>';
+		}
+		echo '</ul>';
+
+		wp_reset_postdata();
+
 		echo '<div id="patched_up_progress_current_time">';
 		echo 	'<div id="patched_up_progress_add_btn" class="btn">+</div>';
 		echo 	'<div id="patched_up_progress_close_btn" class="btn">x</div>';
