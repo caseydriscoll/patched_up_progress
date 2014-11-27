@@ -8,12 +8,12 @@ var pupp = '#patched_up_progress';
 function setCurrentTime() {
 	jQuery( pupp + '_current_time' ).hide();
 
-	now = new Date(),
+	now = new Date();
     then = new Date(
         now.getFullYear(),
         now.getMonth(),
         now.getDate(),
-        0, 0, 0 ),
+        0, 0, 0 );
 
     elapsed_seconds = ( now.getTime() - then.getTime() ) / 1000 | 0;
 	elapsed_percent = ( elapsed_seconds - ( beg_time * 3600 ) ) / total_seconds * 100;
@@ -74,6 +74,8 @@ function setCurrentActionWidth( action ) {
 	current_action_width = jQuery( pupp + '_current_time').offset().left - jQuery( action ).offset().left + 1;
 
 	jQuery( action ).css( 'width', current_action_width + 'px' ).show();
+
+	if ( current_action_width > 3 ) jQuery( '.blink' ).removeClass( 'blink' );
 }
 
 jQuery( document ).ready( function() {
@@ -167,11 +169,31 @@ jQuery( document ).ready( function() {
 				}, 
 				function( response ){
 					if ( response.success ) {
+						now = new Date();
+						then = new Date(
+							now.getFullYear(),
+							now.getMonth(),
+							now.getDate(),
+							0, 0, 0 );
+
+						boundary_time = now.getHours() + ":" + now.getMinutes();
+						jQuery.data( jQuery( '.current' ), 'end', boundary_time );
+
+						jQuery( '.current' ).removeClass( 'current' );
+
+						elapsed_seconds = ( now.getTime() - then.getTime() ) / 1000 | 0;
+						elapsed_percent = ( elapsed_seconds - ( beg_time * 3600 ) ) / total_seconds * 100;
+
+						new_li = '<li style="left:' + elapsed_percent + '%;display:list-item;" class="current"></li>'; 
+
+						jQuery( '#patched_up_actions' ).append( new_li );
+						jQuery( pupp + '_current_time' ).addClass( 'blink' );
+
 						jQuery( '.load, .btn' ).hide();
 						jQuery( pupp + '_action' ).val( '' ).hide();
 
 						jQuery( pupp + '_response' )
-							.html( "Successfully added '" + response.data.title + "'!" )
+							.html( "Started '" + response.data.title + "'!" )
 							.show().fadeOut( 2000 );
 					} else {
 						jQuery( '.load' ).hide();
