@@ -53,6 +53,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 					'day'   => $today['mday'],
 				),
 			),
+			'order' => 'ASC',
 		);
 
 		$actions = new WP_Query( $args );
@@ -66,7 +67,10 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			$beg_time = get_the_time( 'G:i', $id ); 
 			$end_time = get_post_meta( $id, 'end_time', true );
 
-			echo '<li data-time="' . $beg_time . '" data-end="' . $end_time . '"></li>';
+			$classes = '';
+			if ( $end_time == '' ) $classes = 'current';
+
+			echo '<li data-time="' . $beg_time . '" data-end="' . $end_time . '" class="' . $classes .'"></li>';
 		}
 		echo '</ul>';
 

@@ -1,3 +1,11 @@
+@keyframes pulse { 
+  50% { background-color: #3eb0f7}
+}
+
+@-webkit-keyframes pulse { 
+  50% { background-color: #3eb0f7}
+}
+
 .widget_patched_up_progress {
 	padding: 10px !important;
 }
@@ -7,7 +15,7 @@
 	width: 100%; height: 0;
 	padding: 0 0 10% 0;
 
-	border: 1px solid #ccc;
+	border: 1px solid #333;
 
 	cursor: pointer;
 }
@@ -19,13 +27,22 @@
 		display: none; position: absolute; z-index: 90;
 		height: 100%;
 		border-bottom: none;
-		background: #555;
+		background: #184662;
 		color: #fff;
 		opacity: .9;
 		}
 		#patched_up_actions li:hover {
-			background: #888;
+			background: #318cc5;
 		}
+		#patched_up_actions li.current {
+			background: #3e54f7;
+			animation: pulse .5s ease-out 2;
+			-webkit-animation: pulse 2s ease-out infinite;
+			}
+			#patched_up_actions li.current:hover {
+				background: #318cc5;
+			}
+	
 
 #patched_up_progress_current_time {
 	display: none; position: absolute; z-index: 91;
