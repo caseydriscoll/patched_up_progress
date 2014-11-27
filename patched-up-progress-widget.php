@@ -23,8 +23,14 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		wp_register_style( 'patchedUpProgressStyles', plugins_url('css/widget.css', __FILE__) );
 		wp_enqueue_style( 'patchedUpProgressStyles' );
 
+		wp_register_style( 'tipped', plugins_url('css/tipped.css', __FILE__) );
+		wp_enqueue_style( 'tipped' );
+
 		wp_register_script( 'patchedUpProgressScripts', plugins_url('js/widget.js', __FILE__), array( 'jquery' ) );
 		wp_enqueue_script( 'patchedUpProgressScripts' );
+
+		wp_register_script( 'tipped', plugins_url('js/tipped.js', __FILE__), array( 'jquery' ) );
+		wp_enqueue_script( 'tipped' );
 
 		$data = array(
 			'beg_time' => $instance['beg_time'],
@@ -64,13 +70,17 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 			$id = $actions->post->ID;
 			
+			$title = get_the_title( $id );
 			$beg_time = get_the_time( 'G:i', $id ); 
 			$end_time = get_post_meta( $id, 'end_time', true );
 
 			$classes = '';
 			if ( $end_time == '' ) $classes = 'current';
 
-			echo '<li data-time="' . $beg_time . '" data-end="' . $end_time . '" class="' . $classes .'"></li>';
+			echo '<li 
+					data-time="' . $beg_time . '" data-end="' . $end_time . '" 
+					title="' . $title . '" data-tipped-options="position: \'top\'"
+					class="' . $classes .'"></li>';
 		}
 		echo '</ul>';
 

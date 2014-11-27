@@ -79,6 +79,8 @@ function setCurrentActionWidth( action ) {
 }
 
 jQuery( document ).ready( function() {
+	Tipped.create( '#patched_up_actions li' );
+
 	var bar_width = jQuery( pupp + '_bar' ).width();
 	var hour_length = bar_width / ( end_time - beg_time ); 
 
