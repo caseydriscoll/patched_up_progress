@@ -81,6 +81,9 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			$classes = '';
 			if ( $end_time == '' ) $classes = 'current';
 
+			if ( $title == 'Development' ) $classes .= ' one';
+			if ( $title == 'Eating' ) $classes .= ' two';
+
 			echo '<li 
 					data-time="' . $beg_time . '" data-end="' . $end_time . '" 
 					title="' . $title . '" data-tipped-options="position: \'top\'"

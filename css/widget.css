@@ -43,7 +43,9 @@
 			#patched_up_actions li.current:hover {
 				background: #318cc5;
 			}
-	
+		#patched_up_actions li.one { background-color: #621846; }
+		#patched_up_actions li.two { background-color: #daa520; }
+		#patched_up_actions li.three { background-color: #623418; }
 
 #patched_up_progress_current_time {
 	display: none; position: absolute; z-index: 91;
