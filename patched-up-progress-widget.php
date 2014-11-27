@@ -64,8 +64,9 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			$id = $actions->post->ID;
 			
 			$beg_time = get_the_time( 'G:i', $id ); 
+			$end_time = get_post_meta( $id, 'end_time', true );
 
-			echo '<li data-time="' . $beg_time . '">' . $id . '</li>';
+			echo '<li data-time="' . $beg_time . '" data-end="' . $end_time . '"></li>';
 		}
 		echo '</ul>';
 

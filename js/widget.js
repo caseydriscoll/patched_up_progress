@@ -1,6 +1,7 @@
 var beg_time = parseInt( progressWidget.beg_time );
 var end_time = parseInt( progressWidget.end_time );
 var total_seconds = 60 * 60 * ( end_time - beg_time );
+var current_action_width = 0;
 
 var pupp = '#patched_up_progress'; 
 
@@ -31,6 +32,8 @@ function setCurrentTime() {
 		.show().css( 'left', elapsed_percent + '%' )
 		.find( pupp + '_current_time_display' ).html( hours + ":" + min);
 
+	if ( current_action_width != 0 )
+		setCurrentActionWidth( jQuery( pupp + '_actions li:last' ) );
 }
 
 function setInitialTime() {
@@ -47,14 +50,30 @@ function resetTime() {
 function setActionTimes() {
 	jQuery( '#patched_up_actions li' ).each( function() {
 		action_time = jQuery( this ).data( 'time' ).split( ':' );
-		
 		action_time_in_sec = action_time[0] * 3600 + action_time[1] * 60; 
 
+		action_end_time = jQuery( this ).data( 'end' ).split( ':' );
+		action_end_time_in_sec = action_end_time[0] * 3600 + action_end_time[1] * 60; 
 		elapsed_percent = ( action_time_in_sec - ( beg_time * 3600 ) ) / total_seconds * 100;
 
 		jQuery( this ).css( 'left', elapsed_percent + '%' ).show();
 
+		if ( jQuery( this ).data( 'end' ) == '' ) {
+			setCurrentActionWidth( this );
+		} else {
+			sec_per_px = total_seconds / jQuery( pupp + '_bar' ).width();
+			width = ( action_end_time_in_sec - action_time_in_sec ) / sec_per_px;
+
+			jQuery( this ).css( 'width', width + 'px' ).show();
+		}
+
 	} ); 
+}
+
+function setCurrentActionWidth( action ) {
+	current_action_width = jQuery( pupp + '_current_time').offset().left - jQuery( action ).offset().left + 1;
+
+	jQuery( action ).css( 'width', current_action_width + 'px' ).show();
 }
 
 jQuery( document ).ready( function() {
@@ -102,6 +121,7 @@ jQuery( document ).ready( function() {
 
 		hours = hours % 12;
 		if ( hours == 0 ) hours = 12;	
+
 
 		jQuery( pupp + '_cursor_time_display' ).html(
 			hours + ":" + min 
