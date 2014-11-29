@@ -88,6 +88,9 @@ jQuery( document ).ready( function() {
 
 	setActionTimes();
 
+	if ( current_action_width <= 3 && current_action_width != 0 ) 
+		jQuery( pupp + '_current_time' ).addClass( 'blink' );
+
 	jQuery( pupp + '_bar' ).on( 'mouseover', function() {
 
 		jQuery( pupp + '_cursor_time' ).show();
