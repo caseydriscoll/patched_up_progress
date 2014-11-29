@@ -102,3 +102,39 @@ function action_updated_messages( $messages ) {
 	return $messages;
 }
 add_filter( 'post_updated_messages', 'action_updated_messages' );
+
+function create_task_custom_taxonomy() {
+	$labels = array(
+		'name'                       => _x( 'Tasks', 'Taxonomy General Name', 'text_domain' ),
+		'singular_name'              => _x( 'Task', 'Taxonomy Singular Name', 'text_domain' ),
+		'menu_name'                  => __( 'Tasks', 'text_domain' ),
+		'all_items'                  => __( 'All Tasks', 'text_domain' ),
+		'parent_item'                => __( 'Parent Task', 'text_domain' ),
+		'parent_item_colon'          => __( 'Parent Task:', 'text_domain' ),
+		'new_item_name'              => __( 'New Task Name', 'text_domain' ),
+		'add_new_item'               => __( 'Add New Task', 'text_domain' ),
+		'edit_item'                  => __( 'Edit Task', 'text_domain' ),
+		'update_item'                => __( 'Update Task', 'text_domain' ),
+		'separate_items_with_commas' => __( 'Separate tasks with commas', 'text_domain' ),
+		'search_items'               => __( 'Search tasks', 'text_domain' ),
+		'add_or_remove_items'        => __( 'Add or remove tasks', 'text_domain' ),
+		'choose_from_most_used'      => __( 'Choose from the most used tasks', 'text_domain' ),
+		'not_found'                  => __( 'Not Found', 'text_domain' ),
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => true,
+	);
+
+	register_taxonomy( 'task', 'action', $args );
+
+	register_taxonomy_for_object_type( 'task', 'action' );
+
+}
+
+add_action( 'init', 'create_task_custom_taxonomy' );
