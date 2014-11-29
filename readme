@@ -25,11 +25,16 @@ Dictionary:
 
 Todo:
 
+- Preload known actions to actions widget
+- Task input box. Actually, I like the idea of unibox, so use char separateor like Action > Task. Preload both, maybe with Select2 
+
+- New admin menu, with Action and Task submenues
+- Admin settings page
+
 - Stop current action with button and keypress on widget
 - Stop action button on edit screen
 - Validate stop time to be G:i
 
-- Custom Tax for tasks and projects
 - 'Pallet' idea for loadable color schemes
 - Action colors based on context/cat
 - Separate cursor display for max z-indexing
