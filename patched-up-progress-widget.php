@@ -53,6 +53,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 		echo '<div id="patched_up_progress_bar">';
 
+		date_default_timezone_set( get_option( 'timezone_string' ) );
 		$today = getdate();
 		$args = array(
 			'post_type'  => 'action',
