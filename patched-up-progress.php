@@ -43,12 +43,15 @@ class Patched_Up_Progress {
 	}
 
 	function set_current_action( $action_id ) {
-		if ( $action_id == get_option( 'current_action' ) ) return;
+		$current_action = get_option( 'current_action' );
+
+		if ( $action_id == $current_action ) return;
 
 		date_default_timezone_set( get_option( 'timezone_string' ) );
 		$timestamp = date( 'G:i' );
 
-		update_post_meta( get_option( 'current_action' ), 'end_time', $timestamp );
+		if ( get_post_meta( $current_action, 'end_time' ) == null ) 
+			update_post_meta( $current_action, 'end_time', $timestamp );
 
 		update_option( 'current_action', $action_id );
 	}
