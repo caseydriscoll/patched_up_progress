@@ -27,6 +27,9 @@ class Patched_Up_Progress {
 				)
 			);
 
+		if ( get_option( 'current_action' ) !== null )
+			$this->stop_action( true );
+
 		$actions = get_option( 'available_actions' );
 
 		if ( ! in_array( $_POST['title'], $actions ) )
@@ -50,7 +53,7 @@ class Patched_Up_Progress {
 		);
 	}
 
-	function stop_action() {
+	function stop_action( $return = false ) {
 		if ( ! is_user_logged_in() )
 			wp_send_json_error( 
 				array(
@@ -69,26 +72,22 @@ class Patched_Up_Progress {
 
 		update_option( 'current_action', '' );
 
-		wp_send_json_success( 
-			array( 
-				'success' => true,
-				'title' => get_the_title( $current_action )
-			)
-		);
+		if ( $return )
+			return;
+		else
+			wp_send_json_success( 
+				array( 
+					'success' => true,
+					'title' => get_the_title( $current_action )
+				)
+			);
 	}
 
 	function set_current_action( $action_id ) {
-		$current_action = get_option( 'current_action' );
-
-		if ( $action_id == $current_action ) return;
-
-		date_default_timezone_set( get_option( 'timezone_string' ) );
-		$timestamp = date( 'G:i' );
-
-		if ( get_post_meta( $current_action, 'end_time' ) == null ) 
-			update_post_meta( $current_action, 'end_time', $timestamp );
-
-		update_option( 'current_action', $action_id );
+		if ( isset( $_POST['action_end_time'] ) )
+			update_option( 'current_action', null );
+		else
+			update_option( 'current_action', $action_id );
 	}
 }
 

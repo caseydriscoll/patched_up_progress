@@ -53,6 +53,9 @@ function action_init() {
 add_action( 'init', 'action_init' );
 
 function init_action_end_time() {
+	wp_register_script( 'patchedUpActionMetaScripts', 
+		plugins_url('js/action_meta.js', __FILE__), array( 'jquery' ) );
+
 	add_meta_box( 'action_end_time_meta_box',
         'Action End Time',
         'display_action_end_time_meta_box',
@@ -62,20 +65,24 @@ function init_action_end_time() {
 add_action( 'admin_init', 'init_action_end_time' );
 
 function display_action_end_time_meta_box( $action ) {
+	wp_enqueue_script( 'patchedUpActionMetaScripts' );
+
     $end_time = esc_html( get_post_meta( $action->ID, 'end_time', true ) );
+	
+	if ( $end_time == '' )	
+		echo '<a class="button end-time">Stop</a>';
     ?>
-            <input type="text" class="widefat" name="action_end_time" value="<?php echo $end_time; ?>" />
+	<input type="text" class="widefat" style="width:auto;" name="action_end_time" value="<?php echo $end_time; ?>" />
+		
     <?php
 }
 
 function add_action_fields( $action_id, $action ) {
-    if ( $action->post_type == 'action' ) {
-        if ( isset( $_POST['action_end_time'] ) && $_POST['action_end_time'] != '' ) {
-            update_post_meta( $action_id, 'end_time', $_POST['action_end_time'] );
-        }
-    }
+	if ( isset( $_POST['action_end_time'] ) && $_POST['action_end_time'] != '' ) {
+		update_post_meta( $action_id, 'end_time', $_POST['action_end_time'] );
+	}
 }
-add_action( 'save_post', 'add_action_fields', 10, 2 );
+add_action( 'save_post_action', 'add_action_fields', 10, 2 );
 
 function action_updated_messages( $messages ) {
 	global $post;

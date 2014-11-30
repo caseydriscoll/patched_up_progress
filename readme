@@ -31,7 +31,7 @@ Todo:
 - New admin menu, with Action and Task submenues
 - Admin settings page
 
-- Stop action button on edit screen
+- Add stop time link in admin col
 - Validate stop time to be G:i
 
 - 'Pallet' idea for loadable color schemes
