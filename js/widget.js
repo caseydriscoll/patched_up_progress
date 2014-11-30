@@ -180,7 +180,9 @@ jQuery( document ).ready( function() {
 	} );
 
 	jQuery( pupp + '_add_btn' ).on( 'click', function() {
-		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
+		if ( 	jQuery( 'body' ).hasClass( 'logged-in' ) || 
+				jQuery( 'body' ).hasClass( 'wp-admin' ) 
+		) {
 			jQuery( '.twitter-typeahead'  ).removeClass( 'hide' );
 			jQuery( '.tt-hint' ).show();
 			jQuery( pupp + '_action' ).show().focus();

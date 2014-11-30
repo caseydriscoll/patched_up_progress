@@ -18,6 +18,7 @@ class Patched_Up_Progress {
 		add_action( 'wp_ajax_stop_action', array( $this, 'stop_action' ) );
 		add_action( 'save_post_action', array( $this, 'set_current_action' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+		add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
 	}
 
 	function add_action() {
@@ -113,6 +114,12 @@ class Patched_Up_Progress {
 		echo '<div class="wrap">';
 		echo 	'<h2>Settings</h2>';
 		echo '</div>';
+	}
+
+	function add_dashboard_widgets() {
+		wp_add_dashboard_widget( 'patched_up_progress', 'Progess', function(){
+			the_widget( 'Patched_Up_Progress_Widget' );
+		} );
 	}
 }
 
