@@ -118,7 +118,8 @@ class Patched_Up_Progress {
 
 	function add_dashboard_widgets() {
 		wp_add_dashboard_widget( 'patched_up_progress', 'Progess', function(){
-			the_widget( 'Patched_Up_Progress_Widget' );
+			$instance = array_shift( get_option( 'widget_patched_up_progress' ) );
+			the_widget( 'Patched_Up_Progress_Widget', $instance );
 		} );
 	}
 }

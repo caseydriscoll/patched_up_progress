@@ -7,6 +7,10 @@
   width: 100%;
   outline: none;
   }
+  .wp-admin .tt-query,
+  .wp-admin .tt-hint {
+    margin: 0;
+  }
 
 .twitter-typeahead {
   width: 50%;
@@ -31,7 +35,7 @@
 
 .tt-hint {
   padding: 16px 6px !important;
-  color: #999
+  color: #aaa !important;
 }
 
 .tt-dropdown-menu {
@@ -45,14 +49,13 @@
 
 .tt-suggestion {
   padding: 3px 10px;
-  font-size: 18px;
+  font-size: 18px !important;
   line-height: 24px;
 }
 
 .tt-suggestion.tt-cursor {
   color: #fff;
   background-color: #0097cf;
-
 }
 
 .tt-suggestion p {

@@ -137,7 +137,10 @@ jQuery( document ).ready( function() {
 		jQuery( pupp + '_cursor_time' ).show();
 		jQuery( pupp + '_current_time_display' ).show();
 
-		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) { 
+		if ( 
+			jQuery( 'body' ).hasClass( 'logged-in' ) ||
+			jQuery( 'body' ).hasClass( 'wp-admin' ) 
+		) { 
 			jQuery( pupp + '_add_btn' ).show();
 
 			if ( jQuery( '#patched_up_actions li' ).last().hasClass( 'current' ) )

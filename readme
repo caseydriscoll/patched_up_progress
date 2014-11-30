@@ -27,6 +27,7 @@ Todo:
 
 - Admin settings page with 'available_actions' editing
 - Setting for adming menu placement
+- Option for height (in percentage)
 
 - Add stop time link in admin col
 - Validate stop time to be G:i
@@ -37,4 +38,3 @@ Todo:
 - Text domain or whatever
 
 - Week view widget
-- Style Dashboard widget

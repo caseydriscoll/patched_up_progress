@@ -6,9 +6,8 @@
   50% { background-color: #3eb0f7}
 }
 
-.widget_patched_up_progress {
-	padding: 10px !important;
-}
+.widget_patched_up_progress { padding: 10px !important; }
+.wp-admin .widget_patched_up_progress { padding: 0px !important; margin-bottom: 0; }
 
 #patched_up_progress_bar {
 	position: relative;
@@ -21,7 +20,7 @@
 }
 
 #patched_up_actions {
-
+	margin: 0;
 	}
 	#patched_up_actions li {
 		display: none; position: absolute; z-index: 90;
@@ -119,21 +118,34 @@
 		border-radius: 2px;
 	}
 
+.wp-admin .twitter-typeahead input,
+.wp-admin textarea#patched_up_progress_content {
+	font-size: 18px;
+}
+
+.wp-admin textarea#patched_up_progress_content {
+	margin-top: 11px;
+}
 
 #patched_up_progress_action,
 #patched_up_progress_task {
 	display: none;
 	width: 100%;
-	padding: 6px !important; margin-top: 10px;
+	padding: 6px !important; margin: 10px 0 0 0;
 	border-color: #999;
+	box-shadow: none;
+	-webkit-box-shadow: none;
 }
 #patched_up_progress_action { border-right: none; }
 #patched_up_progress_task { border-left: none; }
 
 #patched_up_progress_content { 
 	display: none; 
-	padding: 6px !important; margin-top: 10px; 
+	width: 100%;
+	padding: 6px !important; margin: 10px 0 0 0;
 	border-color: #999; 
+	box-shadow: none;
+	-webkit-box-shadow: none;
 }
 
 .load {
