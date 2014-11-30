@@ -212,11 +212,15 @@ jQuery( document ).ready( function() {
 	} );
 
 	jQuery( 'body' ).on( 'keyup', function(e) {
+		if ( jQuery( pupp + '_action' ).is( ':focus' ) )
+			return;
+
 		if ( e.keyCode == 187 ) // +
 			jQuery( pupp + '_add_btn' ).click();
 
 		if ( e.keyCode == 189 ) // -
-			jQuery( pupp + '_stop_btn' ).click();
+			if ( confirm( "Are you sure?" ) )
+				jQuery( pupp + '_stop_btn' ).click();
 
 		if ( e.keyCode == 27 ) // esc
 			jQuery( pupp + '_close_btn' ).click();
@@ -228,7 +232,9 @@ jQuery( document ).ready( function() {
 
 		if ( title == '') return;
 
-		if ( e.keyCode == 13 ) { // enter
+		if ( e.keyCode == 27 ) // esc
+			jQuery( pupp + '_close_btn' ).click();
+		else if ( e.keyCode == 13 ) { // enter
 			jQuery( '.load' ).show();
 
 			jQuery.post(
