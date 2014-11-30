@@ -28,6 +28,7 @@ Todo:
 - Admin settings page with 'available_actions' editing
 - Setting for adming menu placement
 - Option for height (in percentage)
+- Tasks opens post admin menu
 
 - Add stop time link in admin col
 - Validate stop time to be G:i

@@ -50,6 +50,9 @@ class Patched_Up_Progress {
 
 		if ( isset( $_POST['task'] ) ) {
 			$term = get_term_by( 'name', $_POST['task'], 'task' );
+	
+			if ( $term == '' )
+				$term = wp_insert_term( $_POST['task'], 'task' );
 
 			wp_set_post_terms( $post_id, $term->term_id, 'task' );
 		}
