@@ -120,6 +120,7 @@
 
 #patched_up_progress_action {
 	display: none;
+	width: 100%;
 	padding: 6px !important; margin-top: 10px;
 }
 

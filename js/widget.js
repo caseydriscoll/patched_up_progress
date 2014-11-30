@@ -78,8 +78,42 @@ function setCurrentActionWidth( action ) {
 	if ( current_action_width > 3 ) jQuery( '.blink' ).removeClass( 'blink' );
 }
 
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substrRegex;
+ 
+    // an array that will be populated with substring matches
+    matches = [];
+ 
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+ 
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    jQuery.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        // the typeahead jQuery plugin expects suggestions to a
+        // JavaScript object, refer to typeahead docs for more info
+        matches.push({ value: str });
+      }
+    });
+ 
+    cb(matches);
+  };
+};
+
 jQuery( document ).ready( function() {
 	Tipped.create( '#patched_up_actions li' );
+	jQuery( pupp + '_action' ).typeahead({
+		  hint: true,
+		  highlight: true,
+		  minLength: 1
+	},
+	{
+		  name: 'actions',
+		  displayKey: 'value',
+		  source: substringMatcher( progressWidget.actions )
+	});
 
 	var bar_width = jQuery( pupp + '_bar' ).width();
 	var hour_length = bar_width / ( end_time - beg_time ); 
@@ -137,6 +171,7 @@ jQuery( document ).ready( function() {
 
 	jQuery( pupp + '_add_btn' ).on( 'click', function() {
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
+			jQuery( '.twitter-typeahead'  ).removeClass( 'hide' );
 			jQuery( pupp + '_action' ).show().focus();
 			jQuery( pupp + '_close_btn' ).show();
 		} else {
@@ -194,8 +229,9 @@ jQuery( document ).ready( function() {
 						jQuery( '#patched_up_actions' ).append( new_li );
 						jQuery( pupp + '_current_time' ).addClass( 'blink' );
 
-						jQuery( '.load, .btn' ).hide();
+						jQuery( '.load, .btn, .tt-hint' ).hide();
 						jQuery( pupp + '_action' ).val( '' ).hide();
+						jQuery( '.twitter-typeahead' ).addClass( 'hide' );
 
 						jQuery( pupp + '_response' )
 							.html( "Started '" + response.data.title + "'!" )

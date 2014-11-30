@@ -11,11 +11,15 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			plugins_url('css/widget.css', __FILE__) );
 		wp_register_style( 'tipped', 
 			plugins_url('css/tipped.css', __FILE__) );
+		wp_register_style( 'typeahead', 
+			plugins_url('css/typeahead.css', __FILE__) );
 
 		wp_register_script( 'patchedUpProgressScripts', 
 			plugins_url('js/widget.js', __FILE__), array( 'jquery' ) );
 		wp_register_script( 'tipped', 
 			plugins_url('js/tipped.js', __FILE__), array( 'jquery' ) );
+		wp_register_script( 'typeahead', 
+			plugins_url('js/typeahead.js', __FILE__), array( 'jquery' ) );
 
 		parent::__construct(
 			'patched_up_progress',
@@ -32,13 +36,16 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		wp_enqueue_style( 'patchedUpProgressStyles' );
 		wp_enqueue_style( 'tipped' );
+		wp_enqueue_style( 'typeahead' );
 
 		wp_enqueue_script( 'patchedUpProgressScripts' );
 		wp_enqueue_script( 'tipped' );
+		wp_enqueue_script( 'typeahead' );
 
 		$data = array(
 			'beg_time' => $instance['beg_time'],
-			'end_time' => $instance['end_time'] 
+			'end_time' => $instance['end_time'],
+			'actions'  => get_option( 'available_actions' )
 		);
 
 		wp_localize_script( 'patchedUpProgressScripts', 'progressWidget', $data );
