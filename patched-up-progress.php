@@ -17,6 +17,7 @@ class Patched_Up_Progress {
 		add_action( 'wp_ajax_add_action', array( $this, 'add_action' ) );
 		add_action( 'wp_ajax_stop_action', array( $this, 'stop_action' ) );
 		add_action( 'save_post_action', array( $this, 'set_current_action' ) );
+		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 	}
 
 	function add_action() {
@@ -96,6 +97,22 @@ class Patched_Up_Progress {
 			update_option( 'current_action', null );
 		else
 			update_option( 'current_action', $action_id );
+	}
+
+	function add_admin_menu() {
+		add_menu_page( 'Patched Up Progress', 'Progress', 'manage_options', 
+			'progress', array( $this, 'settings_page' ), 'dashicons-awards', 4 );
+
+		add_submenu_page( 'progress', 'Tasks', 'Tasks', 
+			'edit_others_posts', 'edit-tags.php?taxonomy=task');
+		add_submenu_page( 'progress', 'Settings', 'Settings', 
+			'edit_others_posts', 'progress-settings', array( $this, 'settings_page' ) );
+	}
+
+	function settings_page() {
+		echo '<div class="wrap">';
+		echo 	'<h2>Settings</h2>';
+		echo '</div>';
 	}
 }
 

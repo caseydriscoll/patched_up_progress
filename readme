@@ -25,8 +25,7 @@ Dictionary:
 
 Todo:
 
-- New admin menu, with Action and Task submenus
-- Admin settings page
+- Admin settings page with 'available_actions' editing
 
 - Add stop time link in admin col
 - Validate stop time to be G:i
@@ -35,3 +34,6 @@ Todo:
 - Action colors based on context/cat
 - Separate cursor display for max z-indexing
 - Text domain or whatever
+
+- Week view widget
+- Dashboard widget
