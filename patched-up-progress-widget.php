@@ -68,7 +68,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 		date_default_timezone_set( get_option( 'timezone_string' ) );
 		$today = getdate();
-		$args = array(
+		$query_args = array(
 			'post_type'  => 'action',
 			'date_query' => array(
 				array(
@@ -80,7 +80,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			'order' => 'ASC',
 		);
 
-		$actions = new WP_Query( $args );
+		$actions = new WP_Query( $query_args );
 
 		echo '<ul id="patched_up_actions">';
 		while ( $actions->have_posts() ) {
