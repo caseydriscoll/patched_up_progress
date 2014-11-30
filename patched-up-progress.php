@@ -25,6 +25,13 @@ class Patched_Up_Progress {
 					'success' => false
 				)
 			);
+
+		$actions = get_option( 'available_actions' );
+
+		if ( ! in_array( $_POST['title'], $actions ) )
+			array_push( $actions, $_POST['title'] );
+
+		update_option( 'available_actions', $actions );
 			
 		wp_insert_post( 
 			array( 
