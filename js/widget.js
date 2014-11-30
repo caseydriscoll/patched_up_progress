@@ -82,18 +82,12 @@ var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substrRegex;
  
-    // an array that will be populated with substring matches
     matches = [];
  
-    // regex used to determine if a string contains the substring `q`
     substrRegex = new RegExp(q, 'i');
  
-    // iterate through the pool of strings and for any string that
-    // contains the substring `q`, add it to the `matches` array
     jQuery.each(strs, function(i, str) {
       if (substrRegex.test(str)) {
-        // the typeahead jQuery plugin expects suggestions to a
-        // JavaScript object, refer to typeahead docs for more info
         matches.push({ value: str });
       }
     });
@@ -104,6 +98,7 @@ var substringMatcher = function(strs) {
 
 jQuery( document ).ready( function() {
 	Tipped.create( '#patched_up_actions li' );
+
 	jQuery( pupp + '_action' ).typeahead({
 		  hint: true,
 		  highlight: true,
@@ -114,6 +109,18 @@ jQuery( document ).ready( function() {
 		  displayKey: 'value',
 		  source: substringMatcher( progressWidget.actions )
 	});
+
+	jQuery( pupp + '_task' ).typeahead({
+		  hint: true,
+		  highlight: true,
+		  minLength: 1
+	},
+	{
+		  name: 'tasks',
+		  displayKey: 'value',
+		  source: substringMatcher( progressWidget.tasks )
+	});
+
 
 	var bar_width = jQuery( pupp + '_bar' ).width();
 	var hour_length = bar_width / ( end_time - beg_time ); 
@@ -177,6 +184,7 @@ jQuery( document ).ready( function() {
 			jQuery( '.twitter-typeahead'  ).removeClass( 'hide' );
 			jQuery( '.tt-hint' ).show();
 			jQuery( pupp + '_action' ).show().focus();
+			jQuery( pupp + '_task' ).show();
 			jQuery( pupp + '_close_btn' ).show();
 		} else {
 			window.location = '/wp-login.php';
@@ -226,11 +234,12 @@ jQuery( document ).ready( function() {
 			jQuery( pupp + '_close_btn' ).click();
 	} );
 
-	jQuery( pupp + '_action' ).on( 'keypress', function(e) {
+	jQuery( pupp + '_action, ' + pupp + '_task' ).on( 'keypress', function(e) {
 
-		title = jQuery( e.target ).val();
+		action = jQuery( pupp + '_action' ).val();
+		task   = jQuery( pupp + '_task' ).val();
 
-		if ( title == '') return;
+		if ( action == '') return;
 
 		if ( e.keyCode == 27 ) // esc
 			jQuery( pupp + '_close_btn' ).click();
@@ -241,7 +250,8 @@ jQuery( document ).ready( function() {
 				'/wp-admin/admin-ajax.php', 
 				{
 					'action': 'add_action',
-					'title': title 
+					'action_title': action,
+					'task' : task 
 				}, 
 				function( response ){
 					if ( response.success ) {
@@ -267,10 +277,11 @@ jQuery( document ).ready( function() {
 
 						jQuery( '.load, .btn, .tt-hint' ).hide();
 						jQuery( pupp + '_action' ).val( '' ).hide();
+						jQuery( pupp + '_task' ).val( '' ).hide();
 						jQuery( '.twitter-typeahead' ).addClass( 'hide' );
 
 						jQuery( pupp + '_response' )
-							.html( "Started '" + response.data.title + "'!" )
+							.html( "Started " + response.data.action + " " + response.data.task )
 							.show().fadeOut( 2000 );
 					} else {
 						jQuery( '.load' ).hide();

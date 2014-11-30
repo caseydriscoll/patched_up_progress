@@ -32,23 +32,30 @@ class Patched_Up_Progress {
 
 		$actions = get_option( 'available_actions' );
 
-		if ( ! in_array( $_POST['title'], $actions ) )
-			array_push( $actions, $_POST['title'] );
+		if ( ! in_array( $_POST['action_title'], $actions ) )
+			array_push( $actions, $_POST['action_title'] );
 
 		update_option( 'available_actions', $actions );
 			
-		wp_insert_post( 
+		$post_id = wp_insert_post( 
 			array( 
-				'post_title' => $_POST['title'],
+				'post_title' => $_POST['action_title'],
 				'post_type' => 'action',
 				'post_author' => get_current_user_id()
 			)
 		);
 
+		if ( isset( $_POST['task'] ) ) {
+			$term = get_term_by( 'name', $_POST['task'], 'task' );
+
+			wp_set_post_terms( $post_id, $term->term_id, 'task' );
+		}
+
 		wp_send_json_success( 
 			array( 
 				'success' => true,
-				'title' => $_POST['title']
+				'action' => $_POST['action_title'],
+				'task' => $_POST['task']
 			)
 		);
 	}

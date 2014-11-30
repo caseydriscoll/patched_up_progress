@@ -45,8 +45,10 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		$data = array(
 			'beg_time' => $instance['beg_time'],
 			'end_time' => $instance['end_time'],
-			'actions'  => get_option( 'available_actions' )
+			'actions'  => get_option( 'available_actions' ),
+			'tasks'    => get_terms( 'task', array( 'fields' => 'names' ) )
 		);
+
 
 		wp_localize_script( 'patchedUpProgressScripts', 'progressWidget', $data );
 
@@ -115,6 +117,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '</div>';
 
 		echo '<input type="text" id="patched_up_progress_action" />';
+		echo '<input type="text" id="patched_up_progress_task" />';
 		echo '<img class="load" src="/wp-includes/js/thickbox/loadingAnimation.gif" />';
 		echo '<div id="patched_up_progress_response"></div>';
 
