@@ -6,14 +6,17 @@
 .tt-hint {
   width: 100%;
   outline: none;
-}
+  }
 
 .twitter-typeahead {
-  width: 48%;
+  width: 50%;
   background-color: #fff;
   }
   .twitter-typeahead:first-of-type {
-    margin-right: 4%; 
+  }
+  .twitter-typeahead:nth-of-type(2) .tt-query,
+  .twitter-typeahead:nth-of-type(2) .tt-hint {
+    border-left: none;
   }
 
 .twiiter-typeahead:focus {
