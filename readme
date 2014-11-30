@@ -26,11 +26,11 @@ Dictionary:
 Todo:
 
 - Task input box. Actually, I like the idea of unibox, so use char separateor like Action > Task. Preload both, maybe with Select2 
+- Action content input box
 
 - New admin menu, with Action and Task submenues
 - Admin settings page
 
-- Stop current action with button and keypress on widget
 - Stop action button on edit screen
 - Validate stop time to be G:i
 

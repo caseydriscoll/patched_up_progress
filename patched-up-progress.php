@@ -15,6 +15,7 @@ include 'patched-up-progress-action-cpt.php';
 class Patched_Up_Progress {
 	function __construct() {
 		add_action( 'wp_ajax_add_action', array( $this, 'add_action' ) );
+		add_action( 'wp_ajax_stop_action', array( $this, 'stop_action' ) );
 		add_action( 'save_post_action', array( $this, 'set_current_action' ) );
 	}
 
@@ -45,6 +46,33 @@ class Patched_Up_Progress {
 			array( 
 				'success' => true,
 				'title' => $_POST['title']
+			)
+		);
+	}
+
+	function stop_action() {
+		if ( ! is_user_logged_in() )
+			wp_send_json_error( 
+				array(
+					'success' => false
+				)
+			);
+
+		$current_action = get_option( 'current_action' );
+
+		date_default_timezone_set( get_option( 'timezone_string' ) );
+		update_post_meta(
+			$current_action,
+			'end_time',
+			date( 'G:i' )
+		);
+
+		update_option( 'current_action', '' );
+
+		wp_send_json_success( 
+			array( 
+				'success' => true,
+				'title' => get_the_title( $current_action )
 			)
 		);
 	}

@@ -133,6 +133,9 @@ jQuery( document ).ready( function() {
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) { 
 			jQuery( pupp + '_add_btn' ).show();
 
+			if ( jQuery( '#patched_up_actions li' ).last().hasClass( 'current' ) )
+				jQuery( pupp + '_stop_btn' ).show();
+
 			if ( jQuery( pupp + '_action' ).css( 'display' ) != 'none' )
 				jQuery( pupp + '_close_btn' ).show();
 		}
@@ -187,9 +190,33 @@ jQuery( document ).ready( function() {
 		jQuery( '.tt-hint' ).hide();
 	} );
 
+	jQuery( pupp + '_stop_btn' ).on( 'click', function() {
+		jQuery( pupp + '_stop_btn' ).hide();
+		jQuery( '.current' ).removeClass( 'current' );
+
+		jQuery.post(
+			'/wp-admin/admin-ajax.php', 
+			{
+				'action': 'stop_action',
+			}, 
+			function( response ){
+				if ( response.success ) {
+					jQuery( pupp + '_response' )
+						.html( "Stopped " + response.data.title + "" )
+						.show().fadeOut( 2000 );
+				} else {	
+				}
+			}
+		);
+
+	} );
+
 	jQuery( 'body' ).on( 'keyup', function(e) {
 		if ( e.keyCode == 187 ) // +
 			jQuery( pupp + '_add_btn' ).click();
+
+		if ( e.keyCode == 189 ) // -
+			jQuery( pupp + '_stop_btn' ).click();
 
 		if ( e.keyCode == 27 ) // esc
 			jQuery( pupp + '_close_btn' ).click();
