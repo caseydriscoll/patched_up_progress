@@ -41,7 +41,8 @@ class Patched_Up_Progress {
 			array( 
 				'post_title' => $_POST['action_title'],
 				'post_type' => 'action',
-				'post_author' => get_current_user_id()
+				'post_author' => get_current_user_id(),
+				'post_content' => $_POST['content']
 			)
 		);
 

@@ -127,11 +127,13 @@
 	padding: 6px !important; margin-top: 10px;
 	border-color: #999
 }
-#patched_up_progress_action {
-	border-right: none;
-}
-#patched_up_progress_task {
-	border-left: none;
+#patched_up_progress_action { border-right: none; }
+#patched_up_progress_task { border-left: none; }
+
+#patched_up_progress_content { 
+	display: none; 
+	padding: 6px !important; margin-top: 10px; 
+	border-color: #999; 
 }
 
 .load {

@@ -185,6 +185,7 @@ jQuery( document ).ready( function() {
 			jQuery( '.tt-hint' ).show();
 			jQuery( pupp + '_action' ).show().focus();
 			jQuery( pupp + '_task' ).show();
+			jQuery( pupp + '_content' ).show();
 			jQuery( pupp + '_close_btn' ).show();
 		} else {
 			window.location = '/wp-login.php';
@@ -194,6 +195,8 @@ jQuery( document ).ready( function() {
 	jQuery( pupp + '_close_btn' ).on( 'click', function() {
 		jQuery( pupp + '_close_btn' ).hide();
 		jQuery( pupp + '_action' ).empty().hide();
+		jQuery( pupp + '_task' ).empty().hide();
+		jQuery( pupp + '_content' ).empty().hide();
 		jQuery( '.twitter-typeahead' ).addClass( 'hide' );
 		jQuery( '.tt-hint' ).hide();
 	} );
@@ -234,10 +237,11 @@ jQuery( document ).ready( function() {
 			jQuery( pupp + '_close_btn' ).click();
 	} );
 
-	jQuery( pupp + '_action, ' + pupp + '_task' ).on( 'keypress', function(e) {
+	jQuery( pupp + '_action, ' + pupp + '_task, ' + pupp + '_content' ).on( 'keypress', function(e) {
 
-		action = jQuery( pupp + '_action' ).val();
-		task   = jQuery( pupp + '_task' ).val();
+		action  = jQuery( pupp + '_action' ).val();
+		task    = jQuery( pupp + '_task' ).val();
+		content = jQuery( pupp + '_content' ).val();
 
 		if ( action == '') return;
 
@@ -251,7 +255,8 @@ jQuery( document ).ready( function() {
 				{
 					'action': 'add_action',
 					'action_title': action,
-					'task' : task 
+					'task' : task,
+					'content' : content
 				}, 
 				function( response ){
 					if ( response.success ) {
@@ -278,6 +283,7 @@ jQuery( document ).ready( function() {
 						jQuery( '.load, .btn, .tt-hint' ).hide();
 						jQuery( pupp + '_action' ).val( '' ).hide();
 						jQuery( pupp + '_task' ).val( '' ).hide();
+						jQuery( pupp + '_content' ).val( '' ).hide();
 						jQuery( '.twitter-typeahead' ).addClass( 'hide' );
 
 						jQuery( pupp + '_response' )
