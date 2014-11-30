@@ -28,7 +28,7 @@ Todo:
 - Admin settings page with 'available_actions' editing
 - Setting for adming menu placement
 - Option for height (in percentage)
-- Tasks opens post admin menu
+- Tasks opens post admin menu not 'Progress' menu
 
 - Add stop time link in admin col
 - Validate stop time to be G:i
@@ -41,3 +41,7 @@ Todo:
 - Week view widget
 - Slight dashboard visual tweaks
 - Error check dashboard when on $instance available, maybe with 'dashboard' flag
+
+- Be able to 'complete' or 'archive' tasks
+- Dashboard progress bar is glitchy, width is weird
+- Progress bar button placement

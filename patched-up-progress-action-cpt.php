@@ -37,12 +37,12 @@ function action_init() {
 			'name'                => __( 'Actions', 'YOUR-TEXTDOMAIN' ),
 			'singular_name'       => __( 'Action', 'YOUR-TEXTDOMAIN' ),
 			'all_items'           => __( 'Actions', 'YOUR-TEXTDOMAIN' ),
-			'new_item'            => __( 'New action', 'YOUR-TEXTDOMAIN' ),
+			'new_item'            => __( 'New Action', 'YOUR-TEXTDOMAIN' ),
 			'add_new'             => __( 'Add New', 'YOUR-TEXTDOMAIN' ),
-			'add_new_item'        => __( 'Add New action', 'YOUR-TEXTDOMAIN' ),
-			'edit_item'           => __( 'Edit action', 'YOUR-TEXTDOMAIN' ),
-			'view_item'           => __( 'View action', 'YOUR-TEXTDOMAIN' ),
-			'search_items'        => __( 'Search actions', 'YOUR-TEXTDOMAIN' ),
+			'add_new_item'        => __( 'Add New Action', 'YOUR-TEXTDOMAIN' ),
+			'edit_item'           => __( 'Edit Action', 'YOUR-TEXTDOMAIN' ),
+			'view_item'           => __( 'View Action', 'YOUR-TEXTDOMAIN' ),
+			'search_items'        => __( 'Search Actions', 'YOUR-TEXTDOMAIN' ),
 			'not_found'           => __( 'No actions found', 'YOUR-TEXTDOMAIN' ),
 			'not_found_in_trash'  => __( 'No actions found in trash', 'YOUR-TEXTDOMAIN' ),
 			'parent_item_colon'   => __( 'Parent action', 'YOUR-TEXTDOMAIN' ),
@@ -146,3 +146,32 @@ function create_task_custom_taxonomy() {
 }
 
 add_action( 'init', 'create_task_custom_taxonomy' );
+
+function add_action_columns( $action_columns ) {
+	return array(
+        'cb' => '<input type="checkbox" />',
+        'title' => __('Title'),
+		'taxonomy-task' => __('Task'),
+		'content' => __('Content'),
+        'date' => __('Date'),
+        'end_time' => __('End')
+    );
+}
+add_filter( 'manage_action_posts_columns', 'add_action_columns' );
+
+function manage_action_columns( $column_name, $id ) {
+    global $wpdb;
+
+    switch ( $column_name ) {
+    case 'content':
+        the_content( $id );
+		break;
+	case 'end_time':
+		echo get_post_meta( $id, 'end_time' )[0];
+		break;
+ 
+    default:
+        break;
+    } 
+}
+add_action( 'manage_action_posts_custom_column', 'manage_action_columns', 10, 2 );

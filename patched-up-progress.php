@@ -49,12 +49,12 @@ class Patched_Up_Progress {
 		);
 
 		if ( isset( $_POST['task'] ) ) {
-			$term = get_term_by( 'name', $_POST['task'], 'task' );
+			$term = get_term_by( 'name', $_POST['task'], 'task', ARRAY_A );
 	
 			if ( $term == '' )
 				$term = wp_insert_term( $_POST['task'], 'task' );
 
-			wp_set_post_terms( $post_id, $term->term_id, 'task' );
+			wp_set_post_terms( $post_id, $term['term_id'], 'task' );
 		}
 
 		wp_send_json_success( 
