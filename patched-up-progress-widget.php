@@ -78,6 +78,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 				),
 			),
 			'order' => 'ASC',
+			'nopaging' => true
 		);
 
 		$actions = new WP_Query( $query_args );
