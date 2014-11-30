@@ -38,3 +38,5 @@ Todo:
 - Text domain or whatever
 
 - Week view widget
+- Slight dashboard visual tweaks
+- Error check dashboard when on $instance available, maybe with 'dashboard' flag
