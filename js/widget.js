@@ -172,6 +172,7 @@ jQuery( document ).ready( function() {
 	jQuery( pupp + '_add_btn' ).on( 'click', function() {
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
 			jQuery( '.twitter-typeahead'  ).removeClass( 'hide' );
+			jQuery( '.tt-hint' ).show();
 			jQuery( pupp + '_action' ).show().focus();
 			jQuery( pupp + '_close_btn' ).show();
 		} else {
@@ -182,6 +183,8 @@ jQuery( document ).ready( function() {
 	jQuery( pupp + '_close_btn' ).on( 'click', function() {
 		jQuery( pupp + '_close_btn' ).hide();
 		jQuery( pupp + '_action' ).empty().hide();
+		jQuery( '.twitter-typeahead' ).addClass( 'hide' );
+		jQuery( '.tt-hint' ).hide();
 	} );
 
 	jQuery( 'body' ).on( 'keyup', function(e) {
