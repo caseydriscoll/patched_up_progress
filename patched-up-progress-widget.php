@@ -46,7 +46,11 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			'beg_time' => $instance['beg_time'],
 			'end_time' => $instance['end_time'],
 			'actions'  => get_option( 'available_actions' ),
-			'tasks'    => get_terms( 'task', array( 'fields' => 'names' ) )
+			'tasks'    => get_terms( 'task', 
+							array( 
+								'fields' => 'names', 
+								'hide_empty' => false 
+							) )
 		);
 
 
