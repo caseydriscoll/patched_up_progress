@@ -135,6 +135,7 @@ jQuery( document ).ready( function() {
 	jQuery( pupp + '_bar' ).on( 'mouseover', function() {
 
 		jQuery( pupp + '_cursor_time' ).show();
+		jQuery( pupp + '_cursor_time_display' ).show();
 		jQuery( pupp + '_current_time_display' ).show();
 
 		if ( 
@@ -153,6 +154,7 @@ jQuery( document ).ready( function() {
 	} ).on( 'mouseout', function() {
 		
 		jQuery( pupp + '_cursor_time' ).hide();
+		jQuery( pupp + '_cursor_time_display' ).hide();
 		jQuery( pupp + '_current_time_display' ).hide();
 		jQuery( '.btn' ).hide();
 
@@ -164,6 +166,11 @@ jQuery( document ).ready( function() {
 		if ( position < 0 || position_percent > 100 ) return;
 
 		jQuery( pupp + '_cursor_time' ).css( 'left' , position_percent + '%' );
+
+		display_position = position - ( jQuery( pupp + '_cursor_time_display' ).outerWidth() / 2 );
+		display_position_percent = display_position / bar_width * 100;
+
+		jQuery( pupp + '_cursor_time_display' ).css( 'left' , display_position_percent + '%' );
 
 		px_per_hour = bar_width / ( end_time - beg_time );
 

@@ -30,13 +30,14 @@ Todo:
 - Option for height (in percentage)
 - Tasks opens post admin menu not 'Progress' menu
 
+- Make end_time a real time, not G:i
 - Add stop time link in admin col
 - Validate stop time to be G:i
 
 - 'Pallet' idea for loadable color schemes
 - Action colors based on context/cat
-- Separate cursor display for max z-indexing
 - Text domain or whatever
+- Needs some serious js refactoring
 
 - Week view widget
 - Slight dashboard visual tweaks
