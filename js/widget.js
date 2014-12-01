@@ -33,7 +33,7 @@ function setCurrentTime() {
 		.find( pupp + '_current_time_display' ).html( hours + ":" + min);
 
 	if ( current_action_width != 0 )
-		setCurrentActionWidth( jQuery( '.current' ) );
+		setCurrentActionWidth( jQuery( '#patched_up_actions .current' ) );
 }
 
 function setInitialTime() {

@@ -43,5 +43,4 @@ Todo:
 - Error check dashboard when on $instance available, maybe with 'dashboard' flag
 
 - Be able to 'complete' or 'archive' tasks
-- Dashboard progress bar is glitchy, width is weird
 - Progress bar button placement
