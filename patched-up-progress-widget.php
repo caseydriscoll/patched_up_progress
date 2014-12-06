@@ -94,7 +94,16 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			$end_time = get_post_meta( $id, 'end_time', true );
 
 			$classes = '';
-			if ( $end_time == '' ) $classes = 'current';
+			if ( $end_time == '' ) {
+				$classes = 'current';
+				$task    = wp_get_post_terms( $id, 'task' )[0]->name;
+				error_log( print_r( $task, 1) );
+				$current = array(
+								'author' => get_the_author(),
+								'action' => strtolower( $title ),
+								'task'   => $task
+								);
+			}
 
 			if ( $title == 'Development' ) $classes .= ' one';
 			if ( $title == 'Eating' ) $classes .= ' two';
@@ -125,6 +134,13 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '<textarea id="patched_up_progress_content"></textarea>';
 		echo '<img class="load" src="/wp-includes/js/thickbox/loadingAnimation.gif" />';
 		echo '<div id="patched_up_progress_response"></div>';
+
+		if ( isset( $current ) ) {
+			echo '<p id="patched_up_progress_currently">' . 
+					$current['author'] . ' is currently ' . $current['action'] . ' ' . $task .
+				 '</p>';
+		}
+
 
 
 		echo $args['after_widget'];

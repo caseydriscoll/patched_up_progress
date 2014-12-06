@@ -44,4 +44,9 @@ Todo:
 - Error check dashboard when on $instance available, maybe with 'dashboard' flag
 
 - Be able to 'complete' or 'archive' tasks
+- Completely new Task UI
 - Progress bar button placement
+
+- Logs
+
+- 'Is currently' text based on setting
