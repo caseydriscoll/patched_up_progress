@@ -48,5 +48,7 @@ Todo:
 - Progress bar button placement
 
 - Logs
+- A 'log' custom post type
+- Ability to append to current log from any page with '>'
 
 - 'Is currently' text based on setting

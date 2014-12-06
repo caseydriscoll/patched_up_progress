@@ -97,7 +97,6 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			if ( $end_time == '' ) {
 				$classes = 'current';
 				$task    = wp_get_post_terms( $id, 'task' )[0]->name;
-				error_log( print_r( $task, 1) );
 				$current = array(
 								'author' => get_the_author(),
 								'action' => strtolower( $title ),
