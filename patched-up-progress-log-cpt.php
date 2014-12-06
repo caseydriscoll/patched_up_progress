@@ -26,6 +26,18 @@ function set_log_title( $post_id, $post, $update ) {
 }
 add_action( 'save_post_log', 'set_log_title', 10, 3 );
 
+
+
+function add_logs_to_loop( $query ) {
+    if ( is_home() && $query->is_main_query() )
+        $query->set( 'post_type', array( 'post', 'log') );
+    
+    return $query;
+}
+add_filter( 'pre_get_posts', 'add_logs_to_loop' );
+
+
+
 function log_init() {
     register_post_type( 'log', array(
         'hierarchical'      => false,
