@@ -34,6 +34,8 @@ class Patched_Up_Progress {
 
 		$actions = get_option( 'available_actions' );
 
+		if ( $actions == '' ) $actions = array();
+
 		if ( ! in_array( $_POST['action_title'], $actions ) )
 			array_push( $actions, $_POST['action_title'] );
 
