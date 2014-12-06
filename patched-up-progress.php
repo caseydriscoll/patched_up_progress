@@ -123,26 +123,35 @@ class Patched_Up_Progress {
 		  'posts_per_page' => 1
 		);
 
+		$today = "\n\n<strong>" . date('l') . "</strong>";
+
+		$content = "\n\n" . $_POST['content'];
+
 		$log = new WP_Query( $args );		
 
 		if ( $log->have_posts() ) {
-		  while ( $log->have_posts() ) : $log->the_post();
+		 	while ( $log->have_posts() ) : $log->the_post();
+
+		 	if ( strpos( get_the_content(), $today ) === false )
+		 		$content = $today . $content;
 
 		  	wp_update_post(
 		  		array(
 		  			'ID'           => get_the_ID(),
-		  			'post_content' => get_the_content() . "\n\n" . $_POST['content']
+		  			'post_content' => get_the_content() . $content
 		  		)
 		  	);
 
 		  endwhile;
 		} else {
+			$content = $today . $content;
+
 			$post_id = wp_insert_post( 
 				array( 
-					'post_title' => 'Review for',
-					'post_type' => 'log',
-					'post_author' => get_current_user_id(),
-					'post_content' => $_POST['content']
+					'post_title'   => 'Review for',
+					'post_type'    => 'log',
+					'post_author'  => get_current_user_id(),
+					'post_content' => $content
 				)
 			);
 		}

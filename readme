@@ -21,7 +21,8 @@ Tasks can be on going, like 'Lunch', 'Workout' or 'Chores'. Since these Tasks ar
 Dictionary:
 
 - Action: A custom post type, and the most atomic unit of work.
-- Task: A custom taxonomy, a collection of Actions
+- Log:    A custom post type, an arbitrary list of weekly content
+- Task:   A custom taxonomy, a collection of Actions
 
 Todo:
 
@@ -48,7 +49,16 @@ Todo:
 - Progress bar button placement
 
 - Logs
-- A 'log' custom post type
-- Ability to append to current log from any page with '>'
+- Remove hard coded bday by adding it to option
+- Add ability for bullets, indents and stuff. Maybe just all markdown
+- Add option for type of tag for day name (strong now, maybe h4 for example)
 
-- 'Is currently' text based on setting
+- A wp_option that stores all the future idk options
+
+- Remove border from ajax img
+
+- 'Is currently' text based on option in DB
+
+- better key listeners when vex and action fields are open
+
+- A 'definition' cpt to define taxonomies? Each tax, like a 'task', gets up to one 'definition' post to add more text, images and more too it. So you don't have to add stuff to tax itself
