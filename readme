@@ -46,6 +46,7 @@ Todo:
 
 - Be able to 'complete' or 'archive' tasks
 - Completely new Task UI
+
 - Progress bar button placement
 
 - Logs
@@ -54,8 +55,6 @@ Todo:
 - Add option for type of tag for day name (strong now, maybe h4 for example)
 
 - A wp_option that stores all the future idk options
-
-- Remove border from ajax img
 
 - 'Is currently' text based on option in DB
 

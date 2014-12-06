@@ -151,6 +151,7 @@
 .load {
 	display: none;
 	margin-top: 10px;
+	border: none;
 }
 
 #patched_up_progress_response {
