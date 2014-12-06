@@ -41,5 +41,14 @@ function open_vex() {
 }
 
 function submit_log( content ) {
-    alert( content );
+    jQuery.post(
+        '/wp-admin/admin-ajax.php', 
+        {
+            'action': 'append_log',
+            'content' : content
+        }, 
+        function( response ){
+            console.log( response );
+        }
+    );
 }

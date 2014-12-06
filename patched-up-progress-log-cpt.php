@@ -1,5 +1,31 @@
 <?php
 
+function set_log_title( $post_id, $post, $update ) {
+    if ( $post->post_title == 'Auto Draft' ) return;
+    if ( $post->post_status == 'trash' ) return;
+
+    date_default_timezone_set( get_option( 'timezone_string' ) );
+    $timestamp = date( '-Ymd' );
+
+    $then = date('YW', strtotime( '1986-04-14'));
+    $diff = date('YW') - $then;
+    $timestamp = ' ' . substr( $diff, 0, -3 ) . '.' . substr( $diff, 1, -2 ) . '.' . substr( $diff, 2 );
+
+    $post->post_status = 'publish';
+    $post->post_title = $post->post_title . $timestamp;    
+
+    if ( $post->post_date == $post->post_modified ) {
+    
+        remove_action( 'save_post_log', 'set_log_title' );
+    
+        wp_update_post( $post );
+
+        add_action( 'save_post_log', 'set_log_title' );
+    }   
+
+}
+add_action( 'save_post_log', 'set_log_title', 10, 3 );
+
 function log_init() {
     register_post_type( 'log', array(
         'hierarchical'      => false,

@@ -17,6 +17,7 @@ class Patched_Up_Progress {
 	function __construct() {
 		add_action( 'wp_ajax_add_action', array( $this, 'add_action' ) );
 		add_action( 'wp_ajax_stop_action', array( $this, 'stop_action' ) );
+		add_action( 'wp_ajax_append_log', array( $this, 'append_log' ) );
 
 		add_action( 'save_post_action', array( $this, 'set_current_action' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
@@ -102,6 +103,54 @@ class Patched_Up_Progress {
 					'title' => get_the_title( $current_action )
 				)
 			);
+	}
+
+	function append_log() {
+		if ( ! is_user_logged_in() )
+			wp_send_json_error( 
+				array(
+					'success' => false
+				)
+			);
+
+	    $diff = date('YW') - date('YW', strtotime( '1986-04-14' ) );
+	    $post_slug = 'review-for-' . substr( $diff, 0, -3 ) . '-' . substr( $diff, 1, -2 ) . '-' . substr( $diff, 2 );
+
+
+		$args = array(
+		  'name' => $post_slug,
+		  'post_type' => 'log',
+		  'posts_per_page' => 1
+		);
+
+		$log = new WP_Query( $args );		
+
+		if ( $log->have_posts() ) {
+		  while ( $log->have_posts() ) : $log->the_post();
+
+		  	wp_update_post(
+		  		array(
+		  			'ID'           => get_the_ID(),
+		  			'post_content' => get_the_content() . "\n\n" . $_POST['content']
+		  		)
+		  	);
+
+		  endwhile;
+		} else {
+			$post_id = wp_insert_post( 
+				array( 
+					'post_title' => 'Review for',
+					'post_type' => 'log',
+					'post_author' => get_current_user_id(),
+					'post_content' => $_POST['content']
+				)
+			);
+		}
+
+		wp_reset_query();
+
+		wp_send_json_success( $post_id );
+
 	}
 
 	function set_current_action( $action_id ) {
