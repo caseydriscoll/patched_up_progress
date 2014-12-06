@@ -17,9 +17,14 @@ class Patched_Up_Progress {
 	function __construct() {
 		add_action( 'wp_ajax_add_action', array( $this, 'add_action' ) );
 		add_action( 'wp_ajax_stop_action', array( $this, 'stop_action' ) );
+
 		add_action( 'save_post_action', array( $this, 'set_current_action' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
+
+		add_action( 'init', array( $this, 'register_styles_and_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 	}
 
 	function add_action() {
@@ -127,6 +132,26 @@ class Patched_Up_Progress {
 			$instance = array_shift( get_option( 'widget_patched_up_progress' ) );
 			the_widget( 'Patched_Up_Progress_Widget', $instance );
 		} );
+	}
+
+	function register_styles_and_scripts() {
+		wp_register_style( 'vex', 
+			plugins_url('css/vex.css', __FILE__) );
+		wp_register_style( 'vex-wireframe', 
+			plugins_url('css/vex-theme-wireframe.css', __FILE__) );
+
+		wp_register_script( 'vex', 
+			plugins_url('js/vex.combined.min.js', __FILE__), array( 'jquery' ) );
+		wp_register_script( 'log', 
+			plugins_url('js/log.js', __FILE__), array( 'jquery' ) );
+	}
+
+	function enqueue_styles_and_scripts() {
+		wp_enqueue_style( 'vex' );
+		wp_enqueue_style( 'vex-wireframe' );
+
+		wp_enqueue_script( 'vex' );
+		wp_enqueue_script( 'log' );
 	}
 }
 
