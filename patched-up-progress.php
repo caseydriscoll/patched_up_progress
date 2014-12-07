@@ -198,15 +198,23 @@ class Patched_Up_Progress {
 		        	</tr>
 
 		        	<tr valign="top">
-				        <th scope="row">Show "is currently"</th>
-				        <td><input type="checkbox" name="idk-settings[progress][currently]" value="1" <?php if ( $settings['currently'] ) echo 'checked'; ?> /></td>
-		        	</tr>
-
-		        	<tr valign="top">
 				        <th scope="row">Available actions</th>
 				        <td>
 				        	<textarea rows="5" name="idk-settings[progress][available_actions]" /><?php echo esc_attr( $settings['available_actions'] ); ?></textarea>
 				        </td>
+		        	</tr>
+		        </table>
+
+		        <h3>Widget Defaults</h3>
+		        <table class="form-table">
+		        	<tr valign="top">
+				        <th scope="row">Progress Bar Height</th>
+				        <td><input type="text" name="idk-settings[progress][progress_bar_height]" value="<?php echo esc_attr( $settings['progress_bar_height'] ); ?>" /></td>
+		        	</tr>
+
+		        	<tr valign="top">
+				        <th scope="row">Show "is currently"</th>
+				        <td><input type="checkbox" name="idk-settings[progress][currently]" value="1" <?php if ( $settings['currently'] ) echo 'checked'; ?> /></td>
 		        	</tr>
 	        	</table>
 		

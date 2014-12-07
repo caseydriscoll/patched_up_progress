@@ -140,6 +140,12 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 				 '</p>';
 		}
 
+		echo '<style>
+				#patched_up_progress_bar { 
+					padding-bottom: ' . get_option('idk-settings')['progress']['progress_bar_height'] . ' !important;
+				}
+			  </style>';
+
 
 
 		echo $args['after_widget'];
