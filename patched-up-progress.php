@@ -20,6 +20,7 @@ class Patched_Up_Progress {
 		add_action( 'wp_ajax_append_log', array( $this, 'append_log' ) );
 
 		add_action( 'save_post_action', array( $this, 'set_current_action' ) );
+		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
 
@@ -113,9 +114,8 @@ class Patched_Up_Progress {
 				)
 			);
 
-	    $diff = date('YW') - date('YW', strtotime( '1986-04-14' ) );
-	    $post_slug = 'review-for-' . substr( $diff, 0, -3 ) . '-' . substr( $diff, 1, -2 ) . '-' . substr( $diff, 2 );
-
+	    $diff = date('YW') - date('YW', strtotime( get_option( 'idk-settings' )['progress']['birthday'] ) );
+	    $post_slug = 'review-for-' . substr( $diff, 0, 1 ) . '-' . substr( $diff, 1, 1 ) . '-' . substr( $diff, 2 );
 
 		$args = array(
 		  'name' => $post_slug,
@@ -179,10 +179,29 @@ class Patched_Up_Progress {
 			'edit_others_posts', 'progress-settings', array( $this, 'settings_page' ) );
 	}
 
-	function settings_page() {
-		echo '<div class="wrap">';
-		echo 	'<h2>Settings</h2>';
-		echo '</div>';
+	function settings_page() { ?>
+		<div class="wrap">
+			<h2>Settings</h2>
+			<form method="post" action="options.php">
+				<?php 
+					settings_fields( 'idk-progress' ); 
+					$settings = get_option( 'idk-settings' )['progress'];
+				?>
+
+				<table class="form-table">
+			        <tr valign="top">
+				        <th scope="row">Birthday</th>
+				        <td><input type="text" name="idk-settings[progress][birthday]" value="<?php echo esc_attr( $settings['birthday'] ); ?>" /></td>
+		        	</tr>
+	        	</table>
+		
+				<?php submit_button(); ?>
+			</form>
+		</div> <?php
+	}
+
+	function register_settings() {
+		register_setting( 'idk-progress', "idk-settings" );
 	}
 
 	function add_dashboard_widgets() {

@@ -7,9 +7,9 @@ function set_log_title( $post_id, $post, $update ) {
     date_default_timezone_set( get_option( 'timezone_string' ) );
     $timestamp = date( '-Ymd' );
 
-    $then = date('YW', strtotime( '1986-04-14'));
+    $then = date('YW', strtotime( get_option( 'idk-settings' )['progress']['birthday'] ) );
     $diff = date('YW') - $then;
-    $timestamp = ' ' . substr( $diff, 0, -3 ) . '.' . substr( $diff, 1, -2 ) . '.' . substr( $diff, 2 );
+    $timestamp = ' ' . substr( $diff, 0, 1 ) . '.' . substr( $diff, 1, 1 ) . '.' . substr( $diff, 2 );
 
     $post->post_status = 'publish';
     $post->post_title = $post->post_title . $timestamp;    
