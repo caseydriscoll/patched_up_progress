@@ -174,7 +174,7 @@ class Patched_Up_Progress {
 
 	function add_admin_menu() {
 		add_menu_page( 'Patched Up Progress', 'Progress', 'manage_options', 
-			'progress', array( $this, 'settings_page' ), 'dashicons-awards', 4 );
+			'progress', array( $this, 'settings_page' ), 'dashicons-awards', get_option( 'idk-settings' )['progress']['admin_menu'] );
 
 		add_submenu_page( 'progress', 'Tasks', 'Tasks', 
 			'edit_others_posts', 'edit-tags.php?taxonomy=task');
@@ -192,6 +192,11 @@ class Patched_Up_Progress {
 				?>
 
 				<table class="form-table">
+					<tr valign="top">
+				        <th scope="row">Admin Menu Position</th>
+				        <td><input type="text" name="idk-settings[progress][admin_menu]" value="<?php echo esc_attr( $settings['admin_menu'] ); ?>" /></td>
+		        	</tr>
+
 			        <tr valign="top">
 				        <th scope="row">Birthday</th>
 				        <td><input type="text" name="idk-settings[progress][birthday]" value="<?php echo esc_attr( $settings['birthday'] ); ?>" /></td>
