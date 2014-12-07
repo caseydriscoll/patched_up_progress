@@ -45,7 +45,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		$data = array(
 			'beg_time' => $instance['beg_time'],
 			'end_time' => $instance['end_time'],
-			'actions'  => get_option( 'available_actions' ),
+			'actions'  => explode( ', ', get_option( 'idk-settings' )['progress']['available_actions'] ),
 			'tasks'    => get_terms( 'task', 
 							array( 
 								'fields' => 'names', 

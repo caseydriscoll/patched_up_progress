@@ -27,7 +27,6 @@ Dictionary:
 Todo:
 
 - Settings
-- Admin settings page with 'available_actions' editing
 - Setting for adming menu placement
 - Option for height (in percentage)
 - Tasks opens post admin menu not 'Progress' menu
@@ -60,7 +59,7 @@ Todo:
 - Time diff is off of timezone
 - Start week on Sundays
 
-- 'Is currently' text based on option in DB
+- Does array assignment create another array? ['progress']['available_actions']
 
 - better key listeners when vex and action fields are open
 

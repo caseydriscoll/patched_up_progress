@@ -40,14 +40,17 @@ class Patched_Up_Progress {
 		if ( get_option( 'current_action' ) !== null )
 			$this->stop_action( true );
 
-		$actions = get_option( 'available_actions' );
+		 
+		$idk_settings = get_option( 'idk-settings' );
+		$actions = explode( ', ', $idk_settings['progress']['available_actions'] );
 
 		if ( $actions == '' ) $actions = array();
 
 		if ( ! in_array( $_POST['action_title'], $actions ) )
 			array_push( $actions, $_POST['action_title'] );
 
-		update_option( 'available_actions', $actions );
+		$idk_settings['progress']['available_actions'] = implode( ', ', $actions );
+		update_option( 'idk-settings', $idk_settings );
 			
 		$post_id = wp_insert_post( 
 			array( 
@@ -197,6 +200,13 @@ class Patched_Up_Progress {
 		        	<tr valign="top">
 				        <th scope="row">Show "is currently"</th>
 				        <td><input type="checkbox" name="idk-settings[progress][currently]" value="1" <?php if ( $settings['currently'] ) echo 'checked'; ?> /></td>
+		        	</tr>
+
+		        	<tr valign="top">
+				        <th scope="row">Available actions</th>
+				        <td>
+				        	<textarea rows="5" name="idk-settings[progress][available_actions]" /><?php echo esc_attr( $settings['available_actions'] ); ?></textarea>
+				        </td>
 		        	</tr>
 	        	</table>
 		
