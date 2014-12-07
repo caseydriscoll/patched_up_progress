@@ -134,7 +134,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '<img class="load" src="/wp-includes/js/thickbox/loadingAnimation.gif" />';
 		echo '<div id="patched_up_progress_response"></div>';
 
-		if ( isset( $current ) ) {
+		if ( isset( $current ) && get_option('idk-settings')['progress']['currently'] ) {
 			echo '<p id="patched_up_progress_currently">' . 
 					$current['author'] . ' is currently ' . $current['action'] . ' ' . $task .
 				 '</p>';

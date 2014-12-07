@@ -193,6 +193,11 @@ class Patched_Up_Progress {
 				        <th scope="row">Birthday</th>
 				        <td><input type="text" name="idk-settings[progress][birthday]" value="<?php echo esc_attr( $settings['birthday'] ); ?>" /></td>
 		        	</tr>
+
+		        	<tr valign="top">
+				        <th scope="row">Show "is currently"</th>
+				        <td><input type="checkbox" name="idk-settings[progress][currently]" value="1" <?php if ( $settings['currently'] ) echo 'checked'; ?> /></td>
+		        	</tr>
 	        	</table>
 		
 				<?php submit_button(); ?>
