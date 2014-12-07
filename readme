@@ -26,41 +26,43 @@ Dictionary:
 
 Todo:
 
-- Settings
+### Settings
 - Setting for adming menu placement
 - Option for height (in percentage)
 - Tasks opens post admin menu not 'Progress' menu
 
+### datetime
 - Make end_time a real time, not G:i
 - Add stop time link in admin col
 - Validate stop time to be G:i
 
-- 'Pallet' idea for loadable color schemes
-- Action colors based on context/cat
+### Polish and Refactoring
 - Text domain or whatever
 - Needs some serious js refactoring
+- Progress bar button placement
+- Does array assignment create another array? ['progress']['available_actions']
+- better key listeners when vex and action fields are open
 
+### Widgets
 - Week view widget
 - Slight dashboard visual tweaks
 - Error check dashboard when on $instance available, maybe with 'dashboard' flag
+- 'Pallet' idea for loadable color schemes
+- Action colors based on context/cat
 
-- Reports
+### Reports
 - Add Reports page to menu
 - Report tabs for day, week, month, year
 
+### Tasks
 - Be able to 'complete' or 'archive' tasks
 - Completely new Task UI
 
-- Progress bar button placement
-
-- Logs
+### Logs
 - Add ability for bullets, indents and stuff. Maybe just all markdown
 - Add option for type of tag for day name (strong now, maybe h4 for example)
 - Time diff is off of timezone
 - Start week on Sundays
 
-- Does array assignment create another array? ['progress']['available_actions']
-
-- better key listeners when vex and action fields are open
-
+### Definition
 - A 'definition' cpt to define taxonomies? Each tax, like a 'task', gets up to one 'definition' post to add more text, images and more too it. So you don't have to add stuff to tax itself
