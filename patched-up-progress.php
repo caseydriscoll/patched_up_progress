@@ -117,6 +117,7 @@ class Patched_Up_Progress {
 				)
 			);
 
+		date_default_timezone_set( get_option( 'timezone_string' ) );
 	    $diff = date('YW') - date('YW', strtotime( get_option( 'idk-settings' )['progress']['birthday'] ) );
 	    $post_slug = 'review-for-' . substr( $diff, 0, 1 ) . '-' . substr( $diff, 1, 1 ) . '-' . substr( $diff, 2 );
 
