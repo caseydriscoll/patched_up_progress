@@ -61,7 +61,7 @@ class Patched_Up_Progress {
 			)
 		);
 
-		if ( isset( $_POST['task'] ) ) {
+		if ( isset( $_POST['task'] ) && $_POST['task'] != '' ) {
 			$term = get_term_by( 'name', $_POST['task'], 'task', ARRAY_A );
 	
 			if ( $term == '' )
