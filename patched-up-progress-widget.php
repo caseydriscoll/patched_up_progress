@@ -95,8 +95,10 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 			$task     = wp_get_post_terms( $id, 'task' )[0]->name;
 
-			$title    = "<b>" . get_the_title( $id ) . ' ' . $task . "</b>";
-			$title   .= "<i>" . date( 'g:i a', strtotime( $beg_time ) ) . ' - ' . date( 'g:i a', strtotime( $end_time ) ) . "</i>";
+			$title    = get_the_title( $id );
+
+			$tooltip  = "<b>" . $title . ' ' . $task . "</b>";
+			$tooltip .= "<i>" . date( 'g:i a', strtotime( $beg_time ) ) . ' - ' . date( 'g:i a', strtotime( $end_time ) ) . "</i>";
 
 			$classes = '';
 			if ( $end_time == '' ) {
@@ -115,7 +117,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 			echo '<li 
 					data-time="' . $beg_time . '" data-end="' . $end_time . '" 
-					title="' . $title . '" data-tipped-options="position: \'top\'"
+					title="' . $tooltip . '" data-tipped-options="position: \'top\'"
 					class="' . $classes .'"></li>';
 		}
 		echo '</ul>';
