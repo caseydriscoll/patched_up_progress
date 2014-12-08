@@ -47,6 +47,8 @@
 		#patched_up_actions li.two { background-color: #daa520; }
 		#patched_up_actions li.three { background-color: #623418; }
 
+		.tpd-tooltip i { display: block; text-align: center; }
+
 #patched_up_progress_current_time {
 	display: none; position: absolute; z-index: 91;
 	width: 1px; height: 100%;

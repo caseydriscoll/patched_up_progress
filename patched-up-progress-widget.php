@@ -95,7 +95,8 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 			$task     = wp_get_post_terms( $id, 'task' )[0]->name;
 
-			$title    = get_the_title( $id ) . ' ' . $task . "<br/>" . $beg_time . ' - ' . $end_time;
+			$title    = get_the_title( $id ) . ' ' . $task;
+			$title   .= "<i>" . $beg_time . ' - ' . $end_time . "</i>";
 
 			$classes = '';
 			if ( $end_time == '' ) {
