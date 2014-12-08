@@ -89,19 +89,24 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 			$id = $actions->post->ID;
 			
-			$title = get_the_title( $id );
+			
 			$beg_time = get_the_time( 'G:i', $id ); 
 			$end_time = get_post_meta( $id, 'end_time', true );
+
+			$task     = wp_get_post_terms( $id, 'task' )[0]->name;
+
+			$title    = get_the_title( $id ) . ' ' . $task . "<br/>" . $beg_time . ' - ' . $end_time;
 
 			$classes = '';
 			if ( $end_time == '' ) {
 				$classes = 'current';
-				$task    = wp_get_post_terms( $id, 'task' )[0]->name;
 				$current = array(
 								'author' => get_the_author(),
 								'action' => strtolower( $title ),
 								'task'   => $task
 								);
+
+				
 			}
 
 			if ( $title == 'Development' ) $classes .= ' one';

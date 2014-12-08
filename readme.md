@@ -1,4 +1,4 @@
-Patched Up Progress
+# Patched Up Progress
 
 A plugin for tracking work and stuff
 
@@ -18,18 +18,19 @@ Tasks are simply assigned to Actions, just like categories and tags.
 
 Tasks can be on going, like 'Lunch', 'Workout' or 'Chores'. Since these Tasks are perpetual, they never end or close, they simply take in an unending amount of actions.
 
-Dictionary:
+## Dictionary:
 
 - Action: A custom post type, and the most atomic unit of work.
 - Log:    A custom post type, an arbitrary list of weekly content
 - Task:   A custom taxonomy, a collection of Actions
 
-Todo:
+## Todo:
 
 ### Settings
-- Setting for adming menu placement
-- Option for height (in percentage)
+- Add tab for different plugins
 - Tasks opens post admin menu not 'Progress' menu
+- Set default settings
+- Validate fields
 
 ### datetime
 - Make end_time a real time, not G:i
@@ -49,20 +50,27 @@ Todo:
 - Error check dashboard when on $instance available, maybe with 'dashboard' flag
 - 'Pallet' idea for loadable color schemes
 - Action colors based on context/cat
+- Prevent overflow when action begins or ends beyond boundary
 
 ### Reports
 - Add Reports page to menu
 - Report tabs for day, week, month, year
 
+### Actions
+- Add 'total time' meta with date math
+- Add 'total time' to table
+
 ### Tasks
-- Be able to 'complete' or 'archive' tasks
+- Be able to 'complete' or 'archive' tasks <- through definition cpt meta
 - Completely new Task UI
 
 ### Logs
 - Add ability for bullets, indents and stuff. Maybe just all markdown
 - Add option for type of tag for day name (strong now, maybe h4 for example)
 - Time diff is off of timezone
-- Start week on Sundays
+- Start week on Sundays <- find sunday before birthday, count from then
+- Shouldn't appear if not logged in
 
 ### Definition
 - A 'definition' cpt to define taxonomies? Each tax, like a 'task', gets up to one 'definition' post to add more text, images and more too it. So you don't have to add stuff to tax itself
+- Should probably just use posts2posts
