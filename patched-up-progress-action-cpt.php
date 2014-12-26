@@ -55,6 +55,8 @@ add_action( 'init', 'action_init' );
 function init_action_end_time() {
 	wp_register_script( 'patchedUpActionMetaScripts', 
 		plugins_url('js/action_meta.js', __FILE__), array( 'jquery' ) );
+	wp_register_script( 'moment', 
+		plugins_url('js/moment.js', __FILE__), array( 'jquery' ) );
 
 	add_meta_box( 'action_end_time_meta_box',
         'Action End Time',
@@ -66,6 +68,7 @@ add_action( 'admin_init', 'init_action_end_time' );
 
 function display_action_end_time_meta_box( $action ) {
 	wp_enqueue_script( 'patchedUpActionMetaScripts' );
+	wp_enqueue_script( 'moment' );
 
     $end_time = esc_html( get_post_meta( $action->ID, 'end_time', true ) );
 	
