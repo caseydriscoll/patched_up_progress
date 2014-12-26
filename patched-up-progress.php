@@ -24,10 +24,12 @@ $results = $wpdb->get_results(
 	"
 	);
 
-error_log( 'results: ' . print_r( $results, 1 ) );
+// error_log( 'results: ' . print_r( $results, 1 ) );
 foreach ( $results as $result ) {
+	$reformat = date( 'Y-m-d H:i:s', strtotime( get_the_date( 'Y-m-d', $result->post_id ) . $result->meta_value ) ) ;
 	// update_post_meta( $result->post_id, 'end_time', date( 'Y-m-d H:i:s', strtotime( get_the_date( 'Y-m-d', $result->post_id ) . $result->meta_value ) ) );
-	error_log( $result->post_id . ' ' . date( 'Y-m-d H:i:s', strtotime( get_the_date( 'Y-m-d', $result->post_id ) . $result->meta_value ) ) );
+	// error_log( $result->post_id . ' ' . date( 'Y-m-d H:i:s', strtotime( get_the_date( 'Y-m-d', $result->post_id ) . $result->meta_value ) ) );
+	file_put_contents( wp_upload_dir()['basedir'] . 'endtimes.txt', $result->post_id . ' ' . $reformat . "\n", FILE_APPEND );
 }
 
 class Patched_Up_Progress {
