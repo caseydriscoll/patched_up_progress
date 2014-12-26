@@ -190,6 +190,9 @@ jQuery( document ).ready( function() {
 	} );
 
 	jQuery( pupp + '_add_btn' ).on( 'click', function() {
+		// For some reason not clearing as it should
+		jQuery( pupp + '_task' ).val( '' );
+
 		if ( 	jQuery( 'body' ).hasClass( 'logged-in' ) || 
 				jQuery( 'body' ).hasClass( 'wp-admin' ) 
 		) {
