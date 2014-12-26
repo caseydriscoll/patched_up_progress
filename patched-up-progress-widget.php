@@ -102,7 +102,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			if ( $end_time == '' ) {
 				$classes = 'current';
 				$current = array(
-								'author' => get_the_author(),
+								'author' => get_the_author_meta( 'display_name', $actions->post->post_author ),
 								'action' => strtolower( $title ),
 								'task'   => $task
 								);
