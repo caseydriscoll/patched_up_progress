@@ -89,11 +89,10 @@ class Patched_Up_Progress {
 
 		$current_action = get_option( 'current_action' );
 
-		date_default_timezone_set( get_option( 'timezone_string' ) );
 		update_post_meta(
 			$current_action,
 			'end_time',
-			date( 'G:i' )
+			current_time( 'G:i' )
 		);
 
 		update_option( 'current_action', '' );
@@ -117,8 +116,7 @@ class Patched_Up_Progress {
 				)
 			);
 
-		date_default_timezone_set( get_option( 'timezone_string' ) );
-	    $diff = date('YW') - date('YW', strtotime( get_option( 'idk-settings' )['progress']['birthday'] ) );
+	    $diff = current_time('YW') - current_time('YW', strtotime( get_option( 'idk-settings' )['progress']['birthday'] ) );
 	    $post_slug = 'review-for-' . substr( $diff, 0, 1 ) . '-' . substr( $diff, 1, 1 ) . '-' . substr( $diff, 2 );
 
 		$args = array(
@@ -127,7 +125,7 @@ class Patched_Up_Progress {
 		  'posts_per_page' => 1
 		);
 
-		$today = "\n\n<strong>" . date('l') . "</strong>";
+		$today = "\n\n<strong>" . current_time('l') . "</strong>";
 
 		$content = "\n\n" . $_POST['content'];
 

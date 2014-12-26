@@ -4,11 +4,10 @@ function set_log_title( $post_id, $post, $update ) {
     if ( $post->post_title == 'Auto Draft' ) return;
     if ( $post->post_status == 'trash' ) return;
 
-    date_default_timezone_set( get_option( 'timezone_string' ) );
-    $timestamp = date( '-Ymd' );
+    $timestamp = current_time( '-Ymd' );
 
-    $then = date('YW', strtotime( get_option( 'idk-settings' )['progress']['birthday'] ) );
-    $diff = date('YW') - $then;
+    $then = date( 'YW', strtotime( get_option( 'idk-settings' )['progress']['birthday'] ) );
+    $diff = current_time( 'YW' ) - $then;
     $timestamp = ' ' . substr( $diff, 0, 1 ) . '.' . substr( $diff, 1, 1 ) . '.' . substr( $diff, 2 );
 
     $post->post_status = 'publish';

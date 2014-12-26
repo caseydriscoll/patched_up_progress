@@ -4,8 +4,7 @@ function add_action_timestamp( $post_id, $post, $update ) {
 	if ( $post->post_title == 'Auto Draft' ) return;
 	if ( $post->post_status == 'trash' ) return;
 
-	date_default_timezone_set( get_option( 'timezone_string' ) );
-	$timestamp = date( '-Ymd-His' );
+	$timestamp = current_time( '-Ymd-His' );
 
 	$post->post_status = 'publish';
 	$post->post_name = sanitize_title_with_dashes( $post->post_title . $timestamp );	

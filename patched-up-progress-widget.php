@@ -66,15 +66,13 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 		echo '<div id="patched_up_progress_bar">';
 
-		date_default_timezone_set( get_option( 'timezone_string' ) );
-		$today = getdate();
 		$query_args = array(
 			'post_type'  => 'action',
 			'date_query' => array(
 				array(
-					'year'  => $today['year'],
-					'month' => $today['mon'],
-					'day'   => $today['mday'],
+					'year'  => current_time( 'Y' ),
+					'month' => current_time( 'm' ),
+					'day'   => current_time( 'd' ),
 				),
 			),
 			'order' => 'ASC',

@@ -26,6 +26,9 @@ Tasks can be on going, like 'Lunch', 'Workout' or 'Chores'. Since these Tasks ar
 
 ## Todo:
 
+### Bugs
+- Doesn't always stop time for currently, especially if on new screen
+
 ### Settings
 - Add tab for different plugins
 - Tasks opens post admin menu not 'Progress' menu
