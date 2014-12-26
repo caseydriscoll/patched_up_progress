@@ -19,7 +19,9 @@ class Patched_Up_Progress {
 		add_action( 'wp_ajax_stop_action', array( $this, 'stop_action' ) );
 		add_action( 'wp_ajax_append_log', array( $this, 'append_log' ) );
 
-		add_action( 'save_post_action', array( $this, 'set_current_action' ) );
+		add_action( 'save_post_action', array( $this, 'end_current_action' ), 11 );
+		add_action( 'save_post_action', array( $this, 'set_current_action' ), 12 );
+
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
@@ -164,6 +166,35 @@ class Patched_Up_Progress {
 
 	}
 
+	function end_current_action( $action_id ) {
+		// Only end the current action if you are creating a new one
+		//
+		// This is attached to 'save_post_action', but we don't want to set the end time everytime
+		
+
+		// Can't add end_time if no current action
+		$current_action = get_option( 'current_action' );
+		if ( empty( $current_action ) ) return;
+
+
+		// Don't add end_time if resaving latest action
+		//    of if we are resaving an old action
+		if ( $action_id <= $current_action ) return;
+
+
+		update_post_meta(
+			$current_action,
+			'end_time',
+			current_time( 'G:i' )
+		);
+	}
+
+	/**
+	* Whenever an action is saved add the new current action
+	* 
+	* @action  save_post_action
+	*
+	**/
 	function set_current_action( $action_id ) {
 		if ( isset( $_POST['action_end_time'] ) )
 			update_option( 'current_action', null );
