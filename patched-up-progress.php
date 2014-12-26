@@ -15,6 +15,21 @@ include 'patched-up-progress-log-cpt.php';
 
 include 'lib/detect-mobile-browsers.php';
 
+global $wpdb;
+$results = $wpdb->get_results(
+	"
+	SELECT post_id, meta_value
+	FROM $wpdb->postmeta
+	WHERE meta_key = 'end_time' 
+	"
+	);
+
+error_log( 'results: ' . print_r( $results, 1 ) );
+foreach ( $results as $result ) {
+	// update_post_meta( $result->post_id, 'end_time', date( 'Y-m-d H:i:s', strtotime( get_the_date( 'Y-m-d', $result->post_id ) . $result->meta_value ) ) );
+	error_log( $result->post_id . ' ' . date( 'Y-m-d H:i:s', strtotime( get_the_date( 'Y-m-d', $result->post_id ) . $result->meta_value ) ) );
+}
+
 class Patched_Up_Progress {
 	function __construct() {
 		add_action( 'wp_ajax_add_action', array( $this, 'add_action' ) );
