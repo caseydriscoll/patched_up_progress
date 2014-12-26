@@ -97,6 +97,9 @@ var substringMatcher = function(strs) {
 };
 
 jQuery( document ).ready( function() {
+	if ( jQuery( window ).width() <= 1024 )
+		jQuery( 'body' ).addClass( 'mobile' );
+
 	Tipped.create( '#patched_up_actions li' );
 
 	jQuery( pupp + '_action' ).typeahead({

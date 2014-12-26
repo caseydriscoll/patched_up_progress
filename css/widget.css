@@ -75,6 +75,7 @@
 		display: none; position: absolute; z-index: 101;
 		top: 50%;
 		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
 		width: auto; height: auto;
 		padding: 5px;
 
@@ -83,6 +84,9 @@
 		color: white;
 
 		border-radius: 3px;
+		}
+		.logged-in.mobile #patched_up_progress_bar .dashicons {
+			display: block;
 		}
 		#patched_up_progress_add_btn {
 			right: 3px;
@@ -100,6 +104,9 @@
 			#patched_up_progress_close_btn:hover,
 			#patched_up_progress_stop_btn:hover {
 				background: #d67393;
+			}
+			.logged-in.mobile #patched_up_progress_close_btn {
+				display: none !important;
 			}
 
 #patched_up_progress_cursor_time {
