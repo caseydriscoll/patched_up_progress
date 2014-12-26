@@ -152,8 +152,9 @@ function add_action_columns( $action_columns ) {
         'title' => __('Title'),
 		'taxonomy-task' => __('Task'),
 		'content' => __('Content'),
-        'date' => __('Date'),
-        'end_time' => __('End')
+        'start_time' => __('Start'),
+        'end_time' => __('End'),
+        'total_time' => __('Total')
     );
 }
 add_filter( 'manage_action_posts_columns', 'add_action_columns' );
@@ -165,8 +166,33 @@ function manage_action_columns( $column_name, $id ) {
     case 'content':
         the_content( $id );
 		break;
+	case 'start_time':
+		echo get_the_time( 'Y-m-d H:i:s', $id );
+		break;
 	case 'end_time':
 		echo get_post_meta( $id, 'end_time' )[0];
+		break;
+	case 'total_time':
+		$start_time = new DateTime( get_the_time( 'Y-m-d H:i:s', $id ) );
+		$end_time = new DateTime( get_post_meta( $id, 'end_time' )[0] );
+
+		$diff = date_diff( $start_time, $end_time );
+		
+		if ( $diff->y > 0 )
+			$out = $diff->format( '%Y-%m-%d %H:%i:%s' );
+		else if ( $diff->m > 0 )
+			$out = $diff->format( '%m-%d %H:%i:%s' );
+		else if ( $diff->d > 0 )
+			$out = $diff->format( '%d %H:%i:%s' );
+		else if ( $diff->h > 0 )
+			$out = $diff->format( '%H:%i:%s' );
+		else if ( $diff->i > 0 )
+			$out = $diff->format( '%i:%s' ) . ' minutes';
+		else
+			$out = $diff->format( '%s' ) . ' seconds';
+		
+		echo $out;
+
 		break;
  
     default:
