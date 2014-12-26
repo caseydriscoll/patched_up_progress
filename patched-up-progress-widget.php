@@ -122,10 +122,12 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 		wp_reset_postdata();
 
+
+		echo '<div id="patched_up_progress_add_btn" class="dashicons dashicons-plus"></div>';
+		echo '<div id="patched_up_progress_stop_btn" class="dashicons dashicons-minus"></div>';
+		echo '<div id="patched_up_progress_close_btn" class="dashicons dashicons-no"></div>';
+
 		echo '<div id="patched_up_progress_current_time">';
-		echo 	'<div id="patched_up_progress_add_btn" class="btn">+</div>';
-		echo 	'<div id="patched_up_progress_stop_btn" class="btn">-</div>';
-		echo 	'<div id="patched_up_progress_close_btn" class="btn">x</div>';
 		echo 	'<div id="patched_up_progress_current_time_display"></div>';
 		echo '</div>';
 

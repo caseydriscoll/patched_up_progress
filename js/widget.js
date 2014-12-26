@@ -129,8 +129,10 @@ jQuery( document ).ready( function() {
 
 	setActionTimes();
 
+
 	if ( current_action_width <= 3 && current_action_width != 0 ) 
 		jQuery( pupp + '_current_time' ).addClass( 'blink' );
+
 
 	jQuery( pupp + '_bar' ).on( 'mouseover', function() {
 
@@ -156,7 +158,7 @@ jQuery( document ).ready( function() {
 		jQuery( pupp + '_cursor_time' ).hide();
 		jQuery( pupp + '_cursor_time_display' ).hide();
 		jQuery( pupp + '_current_time_display' ).hide();
-		jQuery( '.btn' ).hide();
+		jQuery( pupp + '_bar' + ' .dashicons' ).hide();
 
 	} ).on( 'mousemove', function(e) {
 
