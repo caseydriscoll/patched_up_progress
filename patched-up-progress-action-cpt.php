@@ -189,9 +189,9 @@ function manage_action_columns( $column_name, $id ) {
 		$diff = date_diff( $start_time, $end_time );
 		
 		if ( $diff->h > 0 )
-			$out = $diff->format( '%h:%I:%s' ) . ' hours';
+			$out = $diff->format( '%h:%I:%S' ) . ' hours';
 		else if ( $diff->i > 0 )
-			$out = $diff->format( '%i:%s' ) . ' minutes';
+			$out = $diff->format( '%i:%S' ) . ' minutes';
 		else
 			$out = $diff->format( '%s' ) . ' seconds';
 		
