@@ -19,8 +19,8 @@ class Patched_Up_Progress {
 		add_action( 'wp_ajax_stop_action', array( $this, 'stop_action' ) );
 		add_action( 'wp_ajax_append_log', array( $this, 'append_log' ) );
 
-		add_action( 'save_post_action', array( $this, 'end_current_action' ), 11 );
-		add_action( 'save_post_action', array( $this, 'set_current_action' ), 12 );
+		add_action( 'save_post_action', array( $this, 'end_current_action' ), 11, 2 );
+		add_action( 'save_post_action', array( $this, 'set_current_action' ), 12, 2 );
 
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
@@ -166,16 +166,19 @@ class Patched_Up_Progress {
 
 	}
 
-	function end_current_action( $action_id ) {
+	function end_current_action( $action_id, $post ) {
 		// Only end the current action if you are creating a new one
 		//
 		// This is attached to 'save_post_action', but we don't want to set the end time everytime
-		
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( $post->post_title == 'Auto Draft' ) return;
 
 		// Can't add end_time if no current action
 		$current_action = get_option( 'current_action' );
 		if ( empty( $current_action ) ) return;
-
 
 		// Don't add end_time if resaving latest action
 		//    of if we are resaving an old action
@@ -195,11 +198,17 @@ class Patched_Up_Progress {
 	* @action  save_post_action
 	*
 	**/
-	function set_current_action( $action_id ) {
-		if ( isset( $_POST['action_end_time'] ) )
-			update_option( 'current_action', null );
-		else
+	function set_current_action( $action_id, $post ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( $post->post_title == 'Auto Draft' ) return;
+
+		if ( empty( $_POST['action_end_time'] ) )
 			update_option( 'current_action', $action_id );
+		else
+			update_option( 'current_action', null );
 	}
 
 	function add_admin_menu() {
