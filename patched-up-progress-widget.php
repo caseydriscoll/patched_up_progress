@@ -94,14 +94,21 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			
 			
 			$beg_time = get_the_time( 'G:i', $id ); 
-			$end_time = get_post_meta( $id, 'end_time', true );
+
+			if ( empty( get_post_meta( $id, 'end_time' ) ) ) {
+				$end_time = '';
+				$tooltip_end = 'now';
+			} else {
+				$end_time = date( 'G:i', strtotime( get_post_meta( $id, 'end_time', true ) ) );
+				$tooltip_end = date( 'g:i a', strtotime( $end_time ) );
+			}
 
 			$task     = wp_get_post_terms( $id, 'task' )[0]->name;
 
 			$title    = get_the_title( $id );
 
 			$tooltip  = "<b>" . $title . ' ' . $task . "</b>";
-			$tooltip .= "<i>" . date( 'g:i a', strtotime( $beg_time ) ) . ' - ' . date( 'g:i a', strtotime( $end_time ) ) . "</i>";
+			$tooltip .= "<i>" . date( 'g:i a', strtotime( $beg_time ) ) . ' - ' . $tooltip_end . "</i>";
 
 			$classes = '';
 			if ( $end_time == '' ) {
