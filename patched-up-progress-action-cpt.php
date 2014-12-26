@@ -81,7 +81,7 @@ function display_action_end_time_meta_box( $action ) {
 }
 
 function add_action_fields( $action_id, $action ) {
-	if ( isset( $_POST['action_end_time'] ) && $_POST['action_end_time'] != '' ) {
+	if ( isset( $_POST['action_end_time'] ) ) {
 		update_post_meta( $action_id, 'end_time', $_POST['action_end_time'] );
 	}
 }
@@ -181,14 +181,8 @@ function manage_action_columns( $column_name, $id ) {
 
 		$diff = date_diff( $start_time, $end_time );
 		
-		if ( $diff->y > 0 )
-			$out = $diff->format( '%Y-%m-%d %H:%i:%s' );
-		else if ( $diff->m > 0 )
-			$out = $diff->format( '%m-%d %H:%i:%s' );
-		else if ( $diff->d > 0 )
-			$out = $diff->format( '%d %H:%i:%s' );
-		else if ( $diff->h > 0 )
-			$out = $diff->format( '%H:%i:%s' );
+		if ( $diff->h > 0 )
+			$out = $diff->format( '%h:%i:%s' ) . ' hours';
 		else if ( $diff->i > 0 )
 			$out = $diff->format( '%i:%s' ) . ' minutes';
 		else
