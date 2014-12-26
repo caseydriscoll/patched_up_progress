@@ -173,16 +173,23 @@ function manage_action_columns( $column_name, $id ) {
 		echo get_the_time( 'Y-m-d H:i:s', $id );
 		break;
 	case 'end_time':
-		echo get_post_meta( $id, 'end_time' )[0];
+		if ( empty( get_post_meta( $id, 'end_time' )[0] ) )
+			echo '<i>current</i>';
+		else
+			echo get_post_meta( $id, 'end_time' )[0];
 		break;
 	case 'total_time':
 		$start_time = new DateTime( get_the_time( 'Y-m-d H:i:s', $id ) );
 		$end_time = new DateTime( get_post_meta( $id, 'end_time' )[0] );
 
+
+		if ( empty( get_post_meta( $id, 'end_time' )[0] ) )
+			$end_time = new DateTime( current_time( 'mysql' ) );
+
 		$diff = date_diff( $start_time, $end_time );
 		
 		if ( $diff->h > 0 )
-			$out = $diff->format( '%h:%i:%s' ) . ' hours';
+			$out = $diff->format( '%h:%I:%s' ) . ' hours';
 		else if ( $diff->i > 0 )
 			$out = $diff->format( '%i:%s' ) . ' minutes';
 		else
