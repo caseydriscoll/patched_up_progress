@@ -14,6 +14,8 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		wp_register_style( 'typeahead', 
 			plugins_url('css/typeahead.css', __FILE__) );
 
+		wp_register_script( 'finger',
+			plugins_url('js/jquery.finger.js', __FILE__), array( 'jquery' )  );
 		wp_register_script( 'patchedUpProgressScripts', 
 			plugins_url('js/widget.js', __FILE__), array( 'jquery' ) );
 		wp_register_script( 'tipped', 
@@ -38,6 +40,9 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		wp_enqueue_style( 'tipped' );
 		wp_enqueue_style( 'typeahead' );
 
+		
+		if ( IS_MOBILE == 1 ) wp_enqueue_script( 'finger' );
+		
 		wp_enqueue_script( 'patchedUpProgressScripts' );
 		wp_enqueue_script( 'tipped' );
 		wp_enqueue_script( 'typeahead' );

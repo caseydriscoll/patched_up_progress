@@ -97,8 +97,9 @@ var substringMatcher = function(strs) {
 };
 
 jQuery( document ).ready( function() {
-	if ( jQuery( window ).width() <= 1024 )
+	if ( jQuery( window ).width() <= 1024 ) {
 		jQuery( 'body' ).addClass( 'mobile' );
+	}
 
 	Tipped.create( '#patched_up_actions li' );
 
@@ -194,7 +195,7 @@ jQuery( document ).ready( function() {
 		);
 	} );
 
-	jQuery( pupp + '_add_btn' ).on( 'click', function() {
+	jQuery( pupp + '_add_btn' ).on( 'click tap', function() {
 		// For some reason not clearing as it should
 		jQuery( pupp + '_task' ).val( '' );
 

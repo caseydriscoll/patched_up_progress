@@ -13,6 +13,8 @@ include 'patched-up-progress-widget.php';
 include 'patched-up-progress-action-cpt.php';
 include 'patched-up-progress-log-cpt.php';
 
+include 'lib/detect-mobile-browsers.php';
+
 class Patched_Up_Progress {
 	function __construct() {
 		add_action( 'wp_ajax_add_action', array( $this, 'add_action' ) );
@@ -29,6 +31,7 @@ class Patched_Up_Progress {
 		add_action( 'init', array( $this, 'register_styles_and_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
+
 	}
 
 	function add_action() {

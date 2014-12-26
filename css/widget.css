@@ -85,7 +85,7 @@
 
 		border-radius: 3px;
 		}
-		.logged-in.mobile #patched_up_progress_bar .dashicons {
+		.logged-in.mobile #patched_up_progress_add_btn {
 			display: block;
 		}
 		#patched_up_progress_add_btn {
@@ -104,9 +104,6 @@
 			#patched_up_progress_close_btn:hover,
 			#patched_up_progress_stop_btn:hover {
 				background: #d67393;
-			}
-			.logged-in.mobile #patched_up_progress_close_btn {
-				display: none !important;
 			}
 
 #patched_up_progress_cursor_time {
@@ -130,10 +127,12 @@
 
 .wp-admin .twitter-typeahead input,
 .wp-admin textarea#patched_up_progress_content {
+	-webkit-appearance: none;
 	font-size: 18px;
 }
 
 .wp-admin textarea#patched_up_progress_content {
+	-webkit-appearance: none;
 	margin-top: 11px;
 }
 
@@ -141,10 +140,15 @@
 #patched_up_progress_task {
 	display: none;
 	width: 100%;
-	padding: 6px !important; margin: 10px 0 0 0;
+	padding: 6px !important; margin: 10px 0 0 0 !important;
 	border-color: #999;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+
 	box-shadow: none;
+
 	-webkit-box-shadow: none;
+	-webkit-appearance: none;
 }
 #patched_up_progress_action { border-right: none; }
 #patched_up_progress_task { border-left: none; }
@@ -154,8 +158,13 @@
 	width: 100%;
 	padding: 6px !important; margin: 10px 0 0 0;
 	border-color: #999; 
+    border-radius: 0;
+    -webkit-border-radius: 0;
+
 	box-shadow: none;
+
 	-webkit-box-shadow: none;
+	-webkit-appearance: none;
 }
 
 .load {
