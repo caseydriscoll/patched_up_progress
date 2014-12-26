@@ -94,8 +94,9 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			
 			
 			$beg_time = get_the_time( 'G:i', $id ); 
+			$end_time = get_post_meta( $id, 'end_time' );
 
-			if ( empty( get_post_meta( $id, 'end_time' ) ) ) {
+			if ( empty( $end_time ) ) {
 				$end_time = '';
 				$tooltip_end = 'now';
 			} else {
