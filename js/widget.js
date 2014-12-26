@@ -114,6 +114,17 @@ jQuery( document ).ready( function() {
 		  source: substringMatcher( progressWidget.actions )
 	});
 
+	jQuery( pupp + '_determiner' ).typeahead({
+		  hint: true,
+		  highlight: true,
+		  minLength: 1
+	},
+	{
+		  name: 'determiners',
+		  displayKey: 'value',
+		  source: substringMatcher( progressWidget.determiners )
+	});
+
 	jQuery( pupp + '_task' ).typeahead({
 		  hint: true,
 		  highlight: true,
@@ -205,6 +216,7 @@ jQuery( document ).ready( function() {
 			jQuery( '.twitter-typeahead'  ).removeClass( 'hide' );
 			jQuery( '.tt-hint' ).show();
 			jQuery( pupp + '_action' ).show().focus();
+			jQuery( pupp + '_determiner' ).show();
 			jQuery( pupp + '_task' ).show();
 			jQuery( pupp + '_content' ).show();
 			jQuery( pupp + '_close_btn' ).show();
@@ -260,9 +272,10 @@ jQuery( document ).ready( function() {
 
 	jQuery( pupp + '_action, ' + pupp + '_task, ' + pupp + '_content' ).on( 'keypress', function(e) {
 
-		action  = jQuery( pupp + '_action' ).val();
-		task    = jQuery( pupp + '_task' ).val();
-		content = jQuery( pupp + '_content' ).val();
+		action     = jQuery( pupp + '_action' ).val();
+		determiner = jQuery( pupp + '_determiner' ).val();
+		task       = jQuery( pupp + '_task' ).val();
+		content    = jQuery( pupp + '_content' ).val();
 
 		if ( action == '') return;
 
@@ -276,6 +289,7 @@ jQuery( document ).ready( function() {
 				{
 					'action': 'add_action',
 					'action_title': action,
+					'determiner': determiner,
 					'task' : task,
 					'content' : content
 				}, 
@@ -303,13 +317,18 @@ jQuery( document ).ready( function() {
 
 						jQuery( '.load, .btn, .tt-hint' ).hide();
 						jQuery( pupp + '_action' ).val( '' ).hide();
+						jQuery( pupp + '_determiner' ).val( '' ).hide();
 						jQuery( pupp + '_task' ).val( '' ).hide();
 						jQuery( pupp + '_content' ).val( '' ).hide();
 						jQuery( '.twitter-typeahead' ).addClass( 'hide' );
 
 						jQuery( pupp + '_response' )
-							.html( "Started " + response.data.action + " " + response.data.task )
+							.html( "Started " + response.data.action + " " + response.data.determiner + " " + response.data.task )
 							.show().fadeOut( 2000 );
+
+						jQuery( pupp + '_currently span' )
+							.html( response.data.action + " " + response.data.determiner + " " + response.data.task )
+							.show();
 					} else {
 						jQuery( '.load' ).hide();
 						jQuery( pupp + '_action' ).empty().hide();

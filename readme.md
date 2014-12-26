@@ -27,7 +27,7 @@ Tasks can be on going, like 'Lunch', 'Workout' or 'Chores'. Since these Tasks ar
 ## Todo:
 
 ### Bugs
-- Doesn't always stop time for currently, especially if on new screen
+'Currently' time doesn't bind on ajax submit
 
 ### Settings
 - Add tab for different plugins
@@ -36,14 +36,12 @@ Tasks can be on going, like 'Lunch', 'Workout' or 'Chores'. Since these Tasks ar
 - Validate fields
 
 ### datetime
-- Make end_time a real time, not G:i
 - Add stop time link in admin col
 - Validate stop time to be G:i
 
 ### Polish and Refactoring
 - Text domain or whatever
 - Needs some serious js refactoring
-- Progress bar button placement
 - Does array assignment create another array? ['progress']['available_actions']
 - better key listeners when vex and action fields are open
 
@@ -54,14 +52,13 @@ Tasks can be on going, like 'Lunch', 'Workout' or 'Chores'. Since these Tasks ar
 - 'Pallet' idea for loadable color schemes
 - Action colors based on context/cat
 - Prevent overflow when action begins or ends beyond boundary
+- Link to action
 
 ### Reports
 - Add Reports page to menu
 - Report tabs for day, week, month, year
 
 ### Actions
-- Add 'total time' meta with date math
-- Add 'total time' to table
 
 ### Tasks
 - Be able to 'complete' or 'archive' tasks <- through definition cpt meta

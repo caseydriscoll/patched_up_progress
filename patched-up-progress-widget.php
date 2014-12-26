@@ -48,14 +48,15 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		wp_enqueue_script( 'typeahead' );
 
 		$data = array(
-			'beg_time' => $instance['beg_time'],
-			'end_time' => $instance['end_time'],
-			'actions'  => explode( ', ', get_option( 'idk-settings' )['progress']['available_actions'] ),
-			'tasks'    => get_terms( 'task', 
-							array( 
-								'fields' => 'names', 
-								'hide_empty' => false 
-							) )
+			'beg_time'     => $instance['beg_time'],
+			'end_time'     => $instance['end_time'],
+			'actions'      => explode( ', ', get_option( 'idk-settings' )['progress']['available_actions'] ),
+			'determiners'  => explode( ', ', get_option( 'idk-settings' )['progress']['available_determiners'] ),
+			'tasks'        => get_terms( 'task', 
+								array( 
+									'fields' => 'names', 
+									'hide_empty' => false 
+								) )
 		);
 
 
@@ -115,9 +116,10 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 			if ( $end_time == '' ) {
 				$classes = 'current';
 				$current = array(
-								'author' => get_the_author_meta( 'display_name', $actions->post->post_author ),
-								'action' => strtolower( $title ),
-								'task'   => $task
+								'author'     => get_the_author_meta( 'display_name', $actions->post->post_author ),
+								'action'     => strtolower( $title ),
+								'determiner' => get_post_meta( $id, 'determiner' )[0],
+								'task'       => strtolower( $task )
 								);
 
 				
@@ -150,6 +152,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '</div>';
 
 		echo '<input type="text" id="patched_up_progress_action" />';
+		echo '<input type="text" id="patched_up_progress_determiner" />';
 		echo '<input type="text" id="patched_up_progress_task" />';
 		echo '<textarea id="patched_up_progress_content"></textarea>';
 		echo '<img class="load" src="/wp-includes/js/thickbox/loadingAnimation.gif" />';
@@ -157,8 +160,11 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 
 		if ( isset( $current ) && get_option('idk-settings')['progress']['currently'] ) {
 			echo '<p id="patched_up_progress_currently">' . 
-					$current['author'] . ' is currently ' . $current['action'] . ' ' . $task .
-				 '</p>';
+					$current['author'] . ' is currently ' . 
+					'<span>' . 
+						$current['action'] . ' ' . $current['determiner'] . ' ' . $current['task'] .
+					'</span>' .
+				 '.</p>';
 		}
 
 		echo '<style>

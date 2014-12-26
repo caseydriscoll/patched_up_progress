@@ -137,6 +137,7 @@
 }
 
 #patched_up_progress_action,
+#patched_up_progress_determiner,
 #patched_up_progress_task {
 	display: none;
 	width: 100%;
@@ -151,6 +152,7 @@
 	-webkit-appearance: none;
 }
 #patched_up_progress_action { border-right: none; }
+#patched_up_progress_determiner { border-left: none; border-right: none; }
 #patched_up_progress_task { border-left: none; }
 
 #patched_up_progress_content { 

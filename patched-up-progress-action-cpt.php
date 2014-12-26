@@ -153,6 +153,7 @@ function add_action_columns( $action_columns ) {
 	return array(
         'cb' => '<input type="checkbox" />',
         'title' => __('Title'),
+        'determiner' => __(''),
 		'taxonomy-task' => __('Task'),
 		'content' => __('Content'),
         'start_time' => __('Start'),
@@ -166,6 +167,9 @@ function manage_action_columns( $column_name, $id ) {
     global $wpdb;
 
     switch ( $column_name ) {
+    case 'determiner':
+    	if ( ! empty( get_post_meta( $id, 'determiner' )[0] ) )
+			echo get_post_meta( $id, 'determiner' )[0];
     case 'content':
         the_content( $id );
 		break;

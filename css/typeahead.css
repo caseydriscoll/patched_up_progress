@@ -13,13 +13,14 @@
   }
 
 .twitter-typeahead {
-  width: 50%;
+  width: 40%;
   background-color: #fff;
   }
-  .twitter-typeahead:first-of-type {
+  .twitter-typeahead:nth-of-type(2) {
+    width: 20%;  
   }
-  .twitter-typeahead:nth-of-type(2) .tt-query,
-  .twitter-typeahead:nth-of-type(2) .tt-hint {
+  .twitter-typeahead:nth-of-type(3) .tt-query,
+  .twitter-typeahead:nth-of-type(3) .tt-hint {
     border-left: none;
   }
 

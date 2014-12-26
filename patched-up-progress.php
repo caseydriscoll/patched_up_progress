@@ -48,6 +48,8 @@ class Patched_Up_Progress {
 
 		 
 		$idk_settings = get_option( 'idk-settings' );
+
+		// Do actions
 		$actions = explode( ', ', $idk_settings['progress']['available_actions'] );
 
 		if ( $actions == '' ) $actions = array();
@@ -56,16 +58,33 @@ class Patched_Up_Progress {
 			array_push( $actions, $_POST['action_title'] );
 
 		$idk_settings['progress']['available_actions'] = implode( ', ', $actions );
+
+		// Do determiners
+		if ( isset( $_POST['determiner'] ) && $_POST['determiner'] != '' ) {
+			$determiners = explode( ', ', $idk_settings['progress']['available_determiners'] );
+
+			if ( $determiners == '' ) $determiners = array();
+
+			if ( ! in_array( $_POST['determiner'], $determiners ) )
+				array_push( $determiners, $_POST['determiner'] );
+
+			$idk_settings['progress']['available_determiners'] = implode( ', ', $determiners );
+		}
+
 		update_option( 'idk-settings', $idk_settings );
 			
 		$post_id = wp_insert_post( 
 			array( 
-				'post_title' => $_POST['action_title'],
-				'post_type' => 'action',
-				'post_author' => get_current_user_id(),
+				'post_title'   => $_POST['action_title'],
+				'post_type'    => 'action',
+				'post_author'  => get_current_user_id(),
 				'post_content' => $_POST['content']
 			)
 		);
+
+		if ( isset( $_POST['determiner'] ) && $_POST['determiner'] != '' ) {
+			update_post_meta( $post_id, 'determiner', $_POST['determiner'] );
+		}
 
 		if ( isset( $_POST['task'] ) && $_POST['task'] != '' ) {
 			$term = get_term_by( 'name', $_POST['task'], 'task', ARRAY_A );
@@ -78,9 +97,10 @@ class Patched_Up_Progress {
 
 		wp_send_json_success( 
 			array( 
-				'success' => true,
-				'action' => $_POST['action_title'],
-				'task' => $_POST['task']
+				'success'    => true,
+				'action'     => strtolower( $_POST['action_title'] ),
+				'determiner' => strtolower( $_POST['determiner'] ),
+				'task'       => $_POST['task']
 			)
 		);
 	}
