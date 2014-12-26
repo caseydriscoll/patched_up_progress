@@ -192,7 +192,7 @@ class Patched_Up_Progress {
 		update_post_meta(
 			$current_action,
 			'end_time',
-			current_time( 'G:i' )
+			current_time( 'Y-m-d H:i:s' )
 		);
 	}
 
