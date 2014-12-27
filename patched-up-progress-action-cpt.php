@@ -170,6 +170,7 @@ function manage_action_columns( $column_name, $id ) {
     case 'determiner':
     	if ( ! empty( get_post_meta( $id, 'determiner' )[0] ) )
 			echo get_post_meta( $id, 'determiner' )[0];
+		break;
     case 'content':
         the_content( $id );
 		break;
