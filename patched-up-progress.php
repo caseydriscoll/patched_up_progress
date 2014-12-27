@@ -271,6 +271,12 @@ class Patched_Up_Progress {
 				        	<textarea rows="5" name="idk-settings[progress][available_actions]" /><?php echo esc_attr( $settings['available_actions'] ); ?></textarea>
 				        </td>
 		        	</tr>
+		        	<tr valign="top">
+				        <th scope="row">Available determiners</th>
+				        <td>
+				        	<textarea rows="5" name="idk-settings[progress][available_determiners]" /><?php echo esc_attr( $settings['available_determiners'] ); ?></textarea>
+				        </td>
+		        	</tr>
 		        </table>
 
 		        <h3>Widget Defaults</h3>
