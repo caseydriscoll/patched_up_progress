@@ -322,12 +322,14 @@ jQuery( document ).ready( function() {
 						jQuery( pupp + '_content' ).val( '' ).hide();
 						jQuery( '.twitter-typeahead' ).addClass( 'hide' );
 
+
+						determiner = response.data.determiner + " ";
 						jQuery( pupp + '_response' )
-							.html( "Started " + response.data.action + " " + response.data.determiner + " " + response.data.task )
+							.html( "Started " + response.data.action + " " + determiner + " " + response.data.task )
 							.show().fadeOut( 2000 );
 
 						jQuery( pupp + '_currently span' )
-							.html( response.data.action + " " + response.data.determiner + " " + response.data.task )
+							.html( response.data.action + " " + determiner + response.data.task )
 							.show();
 					} else {
 						jQuery( '.load' ).hide();

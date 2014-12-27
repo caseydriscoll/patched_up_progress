@@ -119,7 +119,7 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 								'author'     => get_the_author_meta( 'display_name', $actions->post->post_author ),
 								'action'     => strtolower( $title ),
 								'determiner' => get_post_meta( $id, 'determiner' )[0],
-								'task'       => strtolower( $task )
+								'task'       => $task
 								);
 
 				
@@ -159,10 +159,11 @@ class Patched_Up_Progress_Widget extends WP_Widget {
 		echo '<div id="patched_up_progress_response"></div>';
 
 		if ( isset( $current ) && get_option('idk-settings')['progress']['currently'] ) {
+			$determiner = $current['determiner'] . ' ';
 			echo '<p id="patched_up_progress_currently">' . 
 					$current['author'] . ' is currently ' . 
 					'<span>' . 
-						$current['action'] . ' ' . $current['determiner'] . ' ' . $current['task'] .
+						$current['action'] . ' ' . $determiner . $current['task'] .
 					'</span>' .
 				 '.</p>';
 		}
