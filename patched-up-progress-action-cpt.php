@@ -1,5 +1,14 @@
 <?php
 
+function load_action_table_js( $hook ) {
+	if ( 'edit.php' != $hook || 'action' != $_GET['post_type'] )
+		return;
+
+	wp_enqueue_script( 'action-table' );
+}
+
+add_action( 'admin_enqueue_scripts', 'load_action_table_js' );
+
 function add_action_timestamp( $post_id, $post, $update ) {
 	if ( $post->post_title == 'Auto Draft' ) return;
 	if ( $post->post_status == 'trash' ) return;
@@ -152,9 +161,8 @@ add_action( 'init', 'create_task_custom_taxonomy' );
 function add_action_columns( $action_columns ) {
 	return array(
         'cb' => '<input type="checkbox" />',
-        'title' => __('Title'),
-        'determiner' => __(''),
-		'taxonomy-task' => __('Task'),
+        'title' => __('Action'),
+		'task' => __('Task'),
 		'content' => __('Content'),
         'start_time' => __('Start'),
         'end_time' => __('End'),
@@ -167,9 +175,14 @@ function manage_action_columns( $column_name, $id ) {
     global $wpdb;
 
     switch ( $column_name ) {
-    case 'determiner':
+    case 'task':
+    	$task = wp_get_post_terms( $id, 'task' )[0];
+
     	if ( ! empty( get_post_meta( $id, 'determiner' )[0] ) )
 			echo get_post_meta( $id, 'determiner' )[0];
+
+		echo ' <a href="' . admin_url( 'edit.php?post_type=action&task=' . $task->slug ) . '">' . $task->name . '</a>';
+
 		break;
     case 'content':
         the_content( $id );
@@ -209,3 +222,14 @@ function manage_action_columns( $column_name, $id ) {
     } 
 }
 add_action( 'manage_action_posts_custom_column', 'manage_action_columns', 10, 2 );
+
+
+function add_stop_action_link( $actions, $post ) {
+	if ( $post->post_type != 'action' ) return $actions;
+
+	if ( get_option( 'current_action' ) == $post->ID )
+		$actions['stop'] = '<a href="" class="stop-action">Stop</a>';
+
+	return $actions;
+}
+add_filter( 'post_row_actions', 'add_stop_action_link', 0, 2 );

@@ -314,6 +314,8 @@ class Patched_Up_Progress {
 		wp_register_style( 'vex-wireframe', 
 			plugins_url('css/vex-theme-wireframe.css', __FILE__) );
 
+		wp_register_script( 'action-table', 
+			plugins_url('js/action_table.js', __FILE__), array( 'jquery' ) );
 		wp_register_script( 'vex', 
 			plugins_url('js/vex.combined.min.js', __FILE__), array( 'jquery' ) );
 		wp_register_script( 'log', 
