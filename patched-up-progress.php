@@ -10,6 +10,7 @@
  */
 
 include 'patched-up-progress-widget.php';
+include 'patched-up-progress-reports.php';
 include 'patched-up-progress-action-cpt.php';
 include 'patched-up-progress-log-cpt.php';
 
@@ -241,8 +242,14 @@ class Patched_Up_Progress {
 
 		add_submenu_page( 'progress', 'Tasks', 'Tasks', 
 			'edit_others_posts', 'edit-tags.php?taxonomy=task');
+		add_submenu_page( 'progress', 'Reports', 'Reports', 
+			'edit_others_posts', 'progress-reports', array( $this, 'reports_page' ) );
 		add_submenu_page( 'progress', 'Settings', 'Settings', 
 			'edit_others_posts', 'progress-settings', array( $this, 'settings_page' ) );
+	}
+
+	function reports_page() {
+		new Patched_Up_Progress_Reports();
 	}
 
 	function settings_page() { ?>
@@ -316,6 +323,8 @@ class Patched_Up_Progress {
 
 		wp_register_script( 'action-table', 
 			plugins_url('js/action_table.js', __FILE__), array( 'jquery' ) );
+		wp_register_script( 'reports', 
+			plugins_url('js/reports.js', __FILE__), array( 'jquery' ) );
 		wp_register_script( 'vex', 
 			plugins_url('js/vex.combined.min.js', __FILE__), array( 'jquery' ) );
 		wp_register_script( 'log', 

@@ -36,7 +36,6 @@ Tasks can be on going, like 'Lunch', 'Workout' or 'Chores'. Since these Tasks ar
 - Validate fields
 
 ### datetime
-- Add stop time link in admin col
 - Validate stop time to be G:i
 
 ### Polish and Refactoring
