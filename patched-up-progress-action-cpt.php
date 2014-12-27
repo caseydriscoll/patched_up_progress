@@ -232,4 +232,4 @@ function add_stop_action_link( $actions, $post ) {
 
 	return $actions;
 }
-add_filter( 'post_row_actions', 'add_stop_action_link', 0, 2 );
+add_filter( 'post_row_actions', 'add_stop_action_link', 10, 2 );
