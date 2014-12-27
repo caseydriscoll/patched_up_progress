@@ -94,25 +94,43 @@ class Patched_Up_Progress_Reports {
                             else
                                 $out = $diff->format( '%s' ) . ' seconds';
 
+
+                            $title = get_the_title( $id );
+                            $task  = get_term_by( 'term_id', $task_id, 'task', ARRAY_A )['name'];
+                            $url   = admin_url( 'post.php?post=' . $id . '&action=edit' );
+
+                            $determiner = '';
+                            if ( ! empty( get_post_meta( $id, 'determiner' )[0] ) )
+                                $determiner = get_post_meta( $id, 'determiner' )[0] . ' ';
+
                             $rows .= '<tr>';
-                            $rows .=     '<td>' . get_the_title( $id ) . '</td>';
+                            $rows .=     '<td><a href="' . $url . '">' . $title . ' ' . $determiner . $task . '</a></td>';
                             $rows .=     '<td>' . get_the_date( '', $id ) . '</td>';
                             $rows .=     '<td>' . $out . '</td>';
                             $rows .= '</tr>';
 
+
                             $then->add( $diff );
                         } 
+
+                        $diff = $now->diff( $then );
+                        if ( $diff->h > 0 )
+                            $out = $diff->format( '%h:%I:%S' ) . ' hours';
+                        else if ( $diff->i > 0 )
+                            $out = $diff->format( '%i:%S' ) . ' minutes';
+                        else
+                            $out = $diff->format( '%s' ) . ' seconds';
 
                         $rows .= '<tr>';
                         $rows .=     '<td></td>';
                         $rows .=     '<td>Total:</td>';
-                        $rows .=     '<td>' . $now->diff( $then )->format( '%h:%I:%S' ) . '</td>';
+                        $rows .=     '<td>' . $out . '</td>';
                         $rows .= '</tr>';
                     }
                 
             ?>
 
-            <table>
+            <table class="wp-list-table widefat fixed">
                 <?php echo $rows; ?>
             </table>
 
